@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
@@ -45,5 +46,8 @@
     "eslint-config-next": "11.0.1",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.15"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
