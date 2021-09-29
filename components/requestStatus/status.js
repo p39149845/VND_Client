@@ -1,0 +1,6 @@
+export const waiting = 'รอการตอบรับจากคนขับ'
+export const accept = 'คนขับรถอนุมัติแล้ว'
+export const reject = 'คำขอถูกปฎิเสธ'
+export const startTrip = 'อยู่ระหว่างการเดินทาง'
+export const reviewAndPayment = 'ประเมินความพึงพอใจและคิดค่าใช้จ่าย'
+export const finish = 'เสร็จสิ้น'

@@ -1,0 +1,268 @@
+import React, { useState } from 'react'
+import Router from 'next/router'
+import DatePicker, { registerLocale } from "react-datepicker";
+
+import th from "date-fns/locale/th"; // the locale you want
+registerLocale("th", th); // register it with the name you want
+
+function VehicleInputComponent() {
+    const [startDate, setStartDate] = useState(new Date());
+    const [stopDate, setStopDate] = useState(new Date());
+
+    const [startTime, setStartTime] = useState(new Date());
+    const [stopTime, setStopTime] = useState(new Date());
+
+    let diff = stopDate.getTime() - startDate.getTime()
+    let msInDate = 1000 * 3600 * 24
+    var hourResult = Math.ceil(diff / msInDate)
+    var diffTime = ((stopTime * 1) - (startTime * 1)) / 3600000
+
+    Date.prototype.addDays = function (days) {
+        var dat = new Date(this.valueOf())
+        dat.setDate(dat.getDate() + days);
+        return dat
+    }
+
+    function getDates(startDate, stopDate) {
+        var dateArray = new Array();
+        var currentDate = startDate;
+        while (currentDate <= stopDate) {
+            dateArray.push(currentDate)
+            currentDate = currentDate.addDays(1);
+        }
+        return dateArray;
+    }
+
+    var dateArr = new Array
+    var dateArray = getDates(startDate, (startDate).addDays(hourResult));
+    for (var i = 0; i < dateArray.length; i++) {
+        var startFormat = (dateArray[i].toString()).split(' ').slice(1, 4)
+        var thaiYear = (parseInt(startFormat[2]) + 543).toString()
+
+        switch (startFormat[0]) {
+            case 'Jan':
+                startFormat[0] = "0";
+                break;
+            case 'Feb':
+                startFormat[0] = '1';
+                break;
+            case 'Mar':
+                startFormat[0] = "2";
+                break;
+            case 'Apr':
+                startFormat[0] = "3";
+                break;
+            case 'May':
+                startFormat[0] = "4";
+                break;
+            case 'Jun':
+                startFormat[0] = "5";
+                break;
+            case 'Jul':
+                startFormat[0] = "6";
+                break;
+            case 'Aug':
+                startFormat[0] = '7';
+                break;
+            case 'Sep':
+                startFormat[0] = "8";
+                break;
+            case 'Oct':
+                startFormat[0] = "9";
+                break;
+            case 'Nov':
+                startFormat[0] = "10";
+                break;
+            case 'Dec':
+                startFormat[0] = "11";
+        }
+
+        var formatS = (startFormat[1] + "/" + startFormat[0] + "/" + thaiYear)
+        dateArr[i] = formatS
+    }
+
+    var stimeFormat = (startTime.toString()).split(' ').slice(4, 5)
+    var etimeFormat = (stopTime.toString()).split(' ').slice(4, 5)
+
+    const [useForm, setUseForm] = useState({
+        id: '',
+        country: '',
+        startDate: '',
+        stopDate: '',
+        startLocation: '',
+        locationDescription: '',
+        numberPeople: '',
+        cost: '',
+        startTime: '',
+        stopTime: '',
+        vehicleId: ''
+    })
+    const handleChange = e => { setUseForm({ ...useForm, [e.target.name]: e.target.value }) }
+    var numPeople = parseInt(useForm.numberPeople)
+    const calHour = () => {
+        if (numPeople > 0 && numPeople <= 15) {
+            if (diffTime < 3 && hourResult < 1) {
+                alert('You have booked a car less than 3 hours.')
+            } else {
+                console.log(useForm)
+                Router.push({
+                    pathname: '/form/filter',
+                    query: {
+                        id: useForm.id,
+                        vehicleId: useForm.vehicleId,
+                        country: useForm.country,
+                        startDate: dateArr[0].toString(),
+                        stopDate: dateArr[hourResult].toString(),
+                        startLocation: useForm.startLocation,
+                        startTime: stimeFormat.toString(),
+                        stopTime: etimeFormat.toString(),
+                        locationDescription: useForm.locationDescription,
+                        numberPeople: useForm.numberPeople,
+                        cost: useForm.cost,
+                        hourResult: hourResult,
+                        dateRange: dateArr,
+                        diffTime: diffTime
+                    },
+                })
+            }
+        } else alert('จำนวนผู้โดยสารเยอะเกินไป')
+    }
+    return (
+        <div className="min-h-screen flex flex-row bg-gray-100">
+            <div className="md:container md:mx-auto content-center">
+                <div className="mt-10 sm:mt-0">
+                    <div className="md:grid md:grid-cols-5 ">
+                        <div className="md:col-span-1">
+                        </div>
+                        <div className="mt-5 md:mt-0 md:col-span-3">
+
+                            <form action="#" method="POST">
+                                <div className="shadow overflow-hidden sm:rounded-md">
+                                    <div className="px-4 py-5 bg-white sm:p-6">
+                                        <div className="grid grid-cols-6 gap-6">
+                                            <div className="col-span-6 sm:col-span-3">
+                                                <label className="block text-lg mx-3 font-medium text-gray-700">จังหวัดที่ให้บริการ</label>
+                                                <select
+                                                    name="country"
+                                                    value={useForm.country}
+                                                    onChange={handleChange}
+                                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                    <option value="">เลือกจังหวัดที่จะใช้บริการ</option>
+                                                    <option value="เชียงราย">เชียงราย</option>
+                                                    <option value="เชียงใหม่">เชียงใหม่</option>
+                                                    <option value="พะเยา">พะเยา</option>
+                                                </select>
+                                            </div>
+
+                                            <div className="col-span-6 sm:col-span-3">
+                                                <label className="block text-lg mx-3 font-medium text-gray-700">สถานที่รับ</label>
+                                                <input
+                                                    type="text"
+                                                    name="startLocation"
+                                                    value={useForm.startLocation}
+                                                    onChange={handleChange}
+                                                    placeholder="มหาวิทยาลัยเชียงใหม่ คณะวิศวกรรมศาสตร์"
+                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                            </div>
+
+                                            <div className="col-span-6 sm:col-span-4">
+                                                <label className="block text-lg mx-3 font-medium text-gray-700">รายละเอียดการเดินทาง</label>
+                                                <input
+                                                    type="text"
+                                                    name="locationDescription"
+                                                    value={useForm.locationDescription}
+                                                    placeholder="รายละเอียดเพิ่มเติมที่ต้องการบอกคนขับ เช่น ต้องการที่นั่งพิเศษ"
+                                                    onChange={handleChange}
+                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                            </div>
+
+                                            <div className="col-span-6 sm:col-span-3">
+                                                <label className="block text-lg mx-3 font-medium text-gray-700">วันและเวลาเริ่มเดินทาง</label>
+                                                <DatePicker
+                                                    selected={startDate}
+                                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                    onChange={(date) => setStartDate(date)}
+                                                    startDate={startDate}
+                                                    endDate={stopDate}
+                                                    dateFormat="dd/MM/yyyy"
+                                                    locale="th"
+                                                />
+                                            </div>
+                                            <div className="col-span-6 sm:col-span-3">
+                                                <label className="block text-lg mx-3 font-medium text-gray-700">เวลา</label>
+                                                <DatePicker
+                                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                    selected={startTime}
+                                                    onChange={(date) => setStartTime(date)}
+                                                    showTimeSelect
+                                                    showTimeSelectOnly
+                                                    timeIntervals={60}
+                                                    timeCaption="Time"
+                                                    dateFormat="h:mm aa"
+                                                />
+                                            </div>
+
+                                            <div className="col-span-6 sm:col-span-3">
+                                                <label className="block text-lg mx-3 font-medium text-gray-700">วันและเวลาจบการเดินทาง</label>
+                                                <DatePicker
+
+                                                    selected={stopDate}
+                                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                    onChange={(date) => setStopDate(date)}
+                                                    startDate={startDate}
+                                                    endDate={stopDate}
+                                                    dateFormat="dd/MM/yyyy"
+                                                    locale="th"
+                                                />
+                                            </div>
+                                            <div className="col-span-6 sm:col-span-3">
+                                                <label className="block text-lg mx-3 font-medium text-gray-700">เวลา</label>
+                                                <DatePicker
+                                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                    selected={stopTime}
+                                                    onChange={(date) => setStopTime(date)}
+                                                    showTimeSelect
+                                                    showTimeSelectOnly
+                                                    timeIntervals={60}
+                                                    timeCaption="Time"
+                                                    dateFormat="h:mm aa"
+                                                />
+                                            </div>
+
+                                            <div className="col-span-6 sm:col-span-3">
+                                                <label className="block text-lg mx-3 font-medium text-gray-700">จำนวนผู้โดยสาร</label>
+                                                <input
+                                                    type="number"
+                                                    name="numberPeople"
+                                                    placeholder="จำนวนผู้โดยสารไม่เกิน15คน "
+                                                    value={useForm.numberPeople}
+                                                    onChange={handleChange}
+                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                        <button
+                                            type="button"
+                                            onClick={calHour}
+                                            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                            disabled={
+                                                !useForm.country ||
+                                                !useForm.numberPeople ||
+                                                !useForm.locationDescription ||
+                                                !useForm.startLocation
+                                            }>
+                                            ค้นหารถ
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default VehicleInputComponent
