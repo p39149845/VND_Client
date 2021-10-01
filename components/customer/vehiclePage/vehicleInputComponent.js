@@ -95,7 +95,8 @@ function VehicleInputComponent() {
         cost: '',
         startTime: '',
         stopTime: '',
-        vehicleId: ''
+        vehicleId: '',
+        additional: ''
     })
     const handleChange = e => { setUseForm({ ...useForm, [e.target.name]: e.target.value }) }
     var numPeople = parseInt(useForm.numberPeople)
@@ -119,6 +120,7 @@ function VehicleInputComponent() {
                         locationDescription: useForm.locationDescription,
                         numberPeople: useForm.numberPeople,
                         cost: useForm.cost,
+                        additional: useForm.additional,
                         hourResult: hourResult,
                         dateRange: dateArr,
                         diffTime: diffTime
@@ -128,13 +130,19 @@ function VehicleInputComponent() {
         } else alert('จำนวนผู้โดยสารเยอะเกินไป')
     }
     return (
-        <div className="min-h-screen flex flex-row bg-gray-100">
-            <div className="md:container md:mx-auto content-center">
-                <div className="mt-10 sm:mt-0">
+        <div className="bg-gray-100">
+           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+                    <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-black">
+                        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รายการรถตู้</h1>
+                    </div>
+                <div className="mt-5">
+
                     <div className="md:grid md:grid-cols-5 ">
+
                         <div className="md:col-span-1">
                         </div>
-                        <div className="mt-5 md:mt-0 md:col-span-3">
+
+                        <div className="mt-5 md:mt-0 md:col-span-3 ">
 
                             <form action="#" method="POST">
                                 <div className="shadow overflow-hidden sm:rounded-md">
@@ -239,6 +247,20 @@ function VehicleInputComponent() {
                                                     onChange={handleChange}
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                             </div>
+                                            <div className="col-span-6 sm:col-span-3">
+                                                <label className="block text-lg mx-3 font-medium text-gray-700">
+                                                    บริการเสริม
+                                                </label>
+                                                <select
+                                                    name="additional"
+                                                    value={useForm.additional}
+                                                    onChange={handleChange}
+                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                    <option value="ไม่มี" >เลือกบริการเสริมที่ต้องการ</option>
+                                                    <option value="นำเที่ยวภายในจังหวัด" >นำเที่ยวภายในจังหวัด</option>
+                                                    <option value="ดูแลผู้สูงอายุ">ดูแลผู้สูงอายุ</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -260,7 +282,7 @@ function VehicleInputComponent() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
     )
 }

@@ -3,6 +3,9 @@ import { useMutation } from "@apollo/react-hooks"
 import Router from 'next/router'
 import { RatingView } from 'react-simple-star-rating'
 
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+
 import Notification from '../notification'
 import ConfirmDialog from '../confirmDialog'
 
@@ -50,6 +53,7 @@ function TestFilter({ vehicle, useForm }) {
             message: "จองรถสำเร็จ",
             type: "success"
         })
+        Router.push('/requestList/history')
     }
 
     const metadata = vehicle && vehicle.user && vehicle.user.metadata.map(function (meta) {
@@ -80,10 +84,19 @@ function TestFilter({ vehicle, useForm }) {
                 <div className="container px-5  mx-auto">
                     <div className="md:grid md:grid-cols-10 py-8">
                         <div className="md:col-span-5 ">
-                            <img
-                                alt="ecommerce"
-                                className=" w-full object-cover object-center rounded border border-gray-200"
-                                src={vehicleData.imageUrl[0]} />
+                            <Carousel width="100%" showArrows emulateTouch useKeyboardArrows>
+                                {vehicle &&
+                                    vehicle.imageUrl
+                                        .map(img => (
+                                            <div key={img.id}>
+                                                <img
+                                                    alt="ecommerce"
+                                                    className=" w-full object-cover object-center rounded border border-gray-200"
+                                                    src={img} alt={vehicleData.description} />
+                                            </div>
+                                        ))}
+
+                            </Carousel>
                             <div className="md:col-span-5 bg-red-300">
                                 {/* /////////////// */}
                             </div>
@@ -108,13 +121,13 @@ function TestFilter({ vehicle, useForm }) {
                                 <span className="text-gray-600 ml-3 md:col-span-1">{lengthStarV} รีวิว</span>
                             </div>
 
-                            <div className="flex mt-4 items-center pb-5 border-b-2 border-gray-200 mb-5 ">
+                            <div className="flex mt-4 items-center p-3 border-b-2 border-gray-200 mb-5 ">
                                 <div>
                                     <p className="leading-relaxed">ชื่อ : {metadata[0].userName}</p>
                                     <p className="leading-relaxed">เพศ : {metadata[0].gender}</p>
                                     <p className="leading-relaxed">จังหวัดที่ให้บริการ : {vehicleData.country}</p>
                                     <p className="leading-relaxed">จำนวนที่นั่ง : {vehicleData.numberPeople}</p>
-                                    <div className='border-1 p-3 rounded-md mt-2' >
+                                    <div className='border-1 rounded-md mt-2' >
                                         {vehicleData.tv ?
                                             <span >TV : มี </span>
                                             :

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 import TestItem from './testItem'
 import VehicleItem from './vehicleItem'
+import Review from './review'
 import { reviewAndPayment } from '../../requestStatus/status'
 
 Modal.setAppElement('#__next')
@@ -59,7 +60,7 @@ function ReguestItem({ request }) {
                 <Modal
                     isOpen={ModalOpen}
                 >
-                    <div className="flex flex-column min-h-screen min-w-screen text-white bg-gray-100 contain-center">
+                    <div className="flex flex-column min-h-screen min-w-screen text-white bg-gray-100 contain-center" key={request.id}>
                         <button
                             className="btn btn-danger"
                             style={{
@@ -70,8 +71,15 @@ function ReguestItem({ request }) {
                             onClick={modalIsOpen}>X
                         </button>
                         <div className="flex flex-column min-w-screen text-white bg-gray-100 contain-center">
+                            <div className=" z-10 flex items-baseline justify-between my-3 mx-5 pt-5 pb-6 border-b border-black">
+                                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รายละเอียด</h1>
+                            </div>
                             <TestItem key={Request.id} request={request} />
                             <VehicleItem key={Request.id} request={request} />
+                            <div className=" z-10 flex items-baseline justify-between my-3 mx-5 pt-5 pb-6 border-b border-black">
+                                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รีวิว</h1>
+                            </div>
+                            <Review key={Request.id} request={request} />
                         </div>
                     </div>
                 </Modal>

@@ -77,13 +77,6 @@ function TestItem({ request }) {
                                 </div>
                             </div>
                         </div>
-
-                        
-                        {request.status === reviewAndPayment ?
-                            <Review key={Request.id} request={request} />
-
-                            : null
-                        }
                     </div>
                 </div>
             </div>

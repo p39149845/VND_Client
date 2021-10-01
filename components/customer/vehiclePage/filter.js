@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from "@apollo/react-hooks"
-import { QUERY_ALLVEHICLE} from '../../gql/query'
+import { QUERY_ALLVEHICLE } from '../../gql/query'
 import VehicleQuery from '../vehicleQuery'
 import { AuthContext } from '../../../appState/AuthProvider'
 
@@ -10,7 +10,6 @@ function Filter() {
     const { User } = useContext(AuthContext)
     const router = useRouter()
     const [useForm] = useState(router.query)
-    // console.log(useForm)
     var numPeople = parseInt(useForm.numberPeople)
 
     const [optional, setOptional] = useState({
@@ -24,19 +23,18 @@ function Filter() {
 
     const handleTv = (e) => {
         setOptional({ ...optional, tv: !optional.tv });
-        console.log("tv ->", optional.tv)
+        
     }
     const handleKaraoke = (e) => {
         setOptional({ ...optional, karaoke: !optional.karaoke });
-        console.log("karaoke ->", optional.karaoke)
+        
     }
     const handleGps = (e) => {
         setOptional({ ...optional, gps: !optional.gps });
-        console.log("gps ->", optional.gps)
+       
     }
     const handleFood = (e) => {
         setOptional({ ...optional, foodDrink: !optional.foodDrink });
-        console.log("foodDrink ->", optional.foodDrink)
     }
     const handleChange = e => { setOptional({ ...optional, [e.target.name]: e.target.value }) }
 
@@ -47,7 +45,7 @@ function Filter() {
         <div className="bg-white ">
             <div>
                 <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-gray-200">
+                    <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-black">
                         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รายการรถตู้</h1>
                     </div>
 
@@ -163,20 +161,6 @@ function Filter() {
                                                     <option value="หญิง">หญิง</option>
                                                 </select>
                                             </div>
-                                            <div className="flex items-start flex flex-col">
-                                                <label className="mx-3 text-md text-gray-600">
-                                                    บริการเสริม
-                                                </label>
-                                                <select
-                                                    name="additional"
-                                                    value={optional.additional}
-                                                    onChange={handleChange}
-                                                    className="mt-2 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                                    <option value="" >เลือกบริการเสริมที่ต้องการ</option>
-                                                    <option value="นำเที่ยวภายในจังหวัด" >นำเที่ยวภายในจังหวัด</option>
-                                                    <option value="ดูแลผู้สูงอายุ">ดูแลผู้สูงอายุ</option>
-                                                </select>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -204,9 +188,7 @@ function Filter() {
                                         {data.allVehicle.
                                             filter(
                                                 function (vehicle) {
-                                                    // console.log(vehicle.user.metadata[0].gender,optional.gender)
                                                     var num = parseInt(vehicle.numberPeople)
-                                                    
                                                     for (var i = 0; i < useForm.dateRange.length; i++) {
                                                         for (var j = 0; j < vehicle.user.workDay.length; j++) {
                                                             if (useForm.dateRange[i] === vehicle.user.workDay[j].date) {
@@ -224,11 +206,12 @@ function Filter() {
                                                                 } else
                                                                     if (vehicle.user.metadata[0].gender !== optional.gender) {
                                                                     } else
-                                                                        if (vehicle.additional[0] !== optional.additional && optional.additional !== "") {
+                                                                        if (numPeople < num) {
                                                                         } else
-                                                                            if (numPeople < num) {
-                                                                            } else
+                                                                            if (useForm.additional == "") {
                                                                                 return vehicle.country.indexOf(useForm.country) !== -1
+                                                                            } else
+                                                                                return vehicle.country.indexOf(useForm.country) !== -1 && vehicle.additional.indexOf(useForm.additional) !== -1
                                                 }
                                             ).
                                             map(

@@ -15,7 +15,7 @@ function VehicleItem({ request }) {
                     <div className="bg-white p-3 border-t-4 border-green-400">
                         <div className="image overflow-hidden">
                             <img className="h-auto w-full mx-auto "
-                            src={request.targetVehicle.imageUrl[0]} alt="Vehicle Image"
+                                src={request.targetVehicle.imageUrl[0]} alt="Vehicle Image"
                             />
                         </div>
                         <h1 className="text-gray-900 font-bold text-xl leading-8 my-1"></h1>
@@ -68,12 +68,7 @@ function VehicleItem({ request }) {
                                 </div>
                             </div>
                         </div>
-                        {request.status === reviewAndPayment ?
 
-                            <Review key={Request.id} request={request} />
-
-                            : null
-                        }
                     </div>
                 </div>
             </div>

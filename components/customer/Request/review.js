@@ -14,29 +14,23 @@ function Review({ request }) {
         starVehicle: "",
         reviewVehicle: "",
     })
-    const [forReview, setForReview] = useState({
-        star: review.star,
-        review: review.review,
-        starVehicle: reviewVehicles.starVehicle,
-        reviewVehicle: reviewVehicles.reviewVehicle,
-    })
     const handleRating = (star) => {
         setReview({ ...star, star: star })
     }
     const handleRatingVehicle = (starVehicle) => {
         setReviewVehicles({ ...starVehicle, starVehicle: starVehicle })
     }
-    console.log(forReview)
+    console.log(review)
     const [createReview] = useMutation(CREATE_REVIEW, {
 
     })
     const handleChange = e => { setReview({ ...review, [e.target.name]: e.target.value }) }
     const handleChangeVehicle = e => { setReviewVehicles({ ...reviewVehicles, [e.target.name]: e.target.value }) }
+
     const handleReview = async () => {
         try {
             const result = await createReview({
                 variables: {
-                    ...forReview,
                     id: request.targetUser.id,
                     vehicleId: request.targetVehicle.id,
                     star: parseInt(review.star),
@@ -52,7 +46,7 @@ function Review({ request }) {
     }
     return (
         <div>
-            <form className="bg-white px-3 ">
+            <form className="bg-white px-3 py-3 my-3 mx-20">
                 <div className="flex items-center  font-semibold text-gray-900 leading-8">
                     <span clas="text-green-500">
                         <svg className="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -67,8 +61,18 @@ function Review({ request }) {
                     <Rating onClick={handleRating} ratingValue={review.star} />
                 </div>
                 <div className="mb-3">
-                    <textarea type="text" className="form-control" name="review" value={review.review} onChange={handleChange} />
+                <select
+                        name="review"
+                        value={review.reivew}
+                        onChange={handleChange}
+                        className="form-select">
+                        <option value="ไม่มี" >รีวิว</option>
+                        <option value="สุภาพเรียบร้อย" >สุภาพเรียบร้อย</option>
+                        <option value="ตรงเวลา">ตรงเวลา</option>
+                        <option value="้เอาใจใส่ผู้โดยสาร">้เอาใจใส่ผู้โดยสาร</option>
+                    </select>
                 </div>
+
                 <div className="flex items-center  font-semibold text-gray-900 leading-8">
                     <span clas="text-green-500">
                         <svg className="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -83,7 +87,16 @@ function Review({ request }) {
                     <Rating onClick={handleRatingVehicle} ratingValue={reviewVehicles.starVehicle} />
                 </div>
                 <div className="mb-3">
-                    <textarea type="text" className="form-control" name="reviewVehicle" value={reviewVehicles.reviewVehicle} onChange={handleChangeVehicle} />
+                <select
+                        name="reviewVehicle"
+                        value={reviewVehicles.reviewVehicle}
+                        onChange={handleChangeVehicle}
+                        className="form-select">
+                        <option value="ไม่มี" >รีวิว</option>
+                        <option value="สะอาดเรียบร้อย" >สะอาดเรียบร้อย</option>
+                        <option value="สภาพรถดี">สภาพรถดี</option>
+                        <option value="บรรยากาศภายในรถดี">บรรยากาศดี</option>
+                    </select>
                 </div>
                 <button type="button" className="btn btn-primary" onClick={() => handleReview()}>ส่งรีวิว</button>
             </form>
