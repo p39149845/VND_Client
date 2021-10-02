@@ -76,10 +76,15 @@ function ReguestItem({ request }) {
                             </div>
                             <TestItem key={Request.id} request={request} />
                             <VehicleItem key={Request.id} request={request} />
-                            <div className=" z-10 flex items-baseline justify-between my-3 mx-5 pt-5 pb-6 border-b border-black">
-                                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รีวิว</h1>
-                            </div>
-                            <Review key={Request.id} request={request} />
+                            {
+                                request.status === reviewAndPayment ?
+                                    <div>
+                                        <div className=" z-10 flex items-baseline justify-between my-3 mx-5 pt-5 pb-6 border-b border-black">
+                                            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รีวิว</h1>
+                                        </div>
+                                        <Review key={Request.id} request={request} />
+                                    </div> : null
+                            }
                         </div>
                     </div>
                 </Modal>

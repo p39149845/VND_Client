@@ -167,6 +167,7 @@ export const QUERY_ALLVEHICLE = gql`
         date
       }
       metadata{
+        status
         gender
         dateOfBirth
         userName

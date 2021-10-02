@@ -26,9 +26,13 @@ function CustomerNav() {
           </span>
         </a>
       </Link>
-      <span className='text-base text-white px-10 uppercase tracking-wide'>
-                สถานะ : ผู้โดยสาร
-            </span>
+      {
+        user && <>
+          <span className='text-base text-white px-10 uppercase tracking-wide'>
+            สถานะ : ผู้โดยสาร
+          </span>
+        </>
+      }
       <button
         className=' inline-flex p-3 hover:bg-green-600 rounded lg:hidden text-white ml-auto hover:text-white outline-none'
         onClick={handleClick}

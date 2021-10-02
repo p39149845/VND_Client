@@ -19,8 +19,6 @@ function VehicleInputComponent() {
     var hourResult = Math.ceil(diff / msInDate)
     var diffTime = ((stopTime * 1) - (startTime * 1)) / 3600000
 
-    console.log(province_th)
-
     Date.prototype.addDays = function (days) {
         var dat = new Date(this.valueOf())
         dat.setDate(dat.getDate() + days);
@@ -45,40 +43,40 @@ function VehicleInputComponent() {
 
         switch (startFormat[0]) {
             case 'Jan':
-                startFormat[0] = "0";
+                startFormat[0] = "1";
                 break;
             case 'Feb':
-                startFormat[0] = '1';
+                startFormat[0] = '2';
                 break;
             case 'Mar':
-                startFormat[0] = "2";
-                break;
-            case 'Apr':
                 startFormat[0] = "3";
                 break;
-            case 'May':
+            case 'Apr':
                 startFormat[0] = "4";
                 break;
-            case 'Jun':
+            case 'May':
                 startFormat[0] = "5";
                 break;
-            case 'Jul':
+            case 'Jun':
                 startFormat[0] = "6";
                 break;
+            case 'Jul':
+                startFormat[0] = "7";
+                break;
             case 'Aug':
-                startFormat[0] = '7';
+                startFormat[0] = '8';
                 break;
             case 'Sep':
-                startFormat[0] = "8";
-                break;
-            case 'Oct':
                 startFormat[0] = "9";
                 break;
-            case 'Nov':
+            case 'Oct':
                 startFormat[0] = "10";
                 break;
-            case 'Dec':
+            case 'Nov':
                 startFormat[0] = "11";
+                break;
+            case 'Dec':
+                startFormat[0] = "12";
         }
 
         var formatS = (startFormat[1] + "/" + startFormat[0] + "/" + thaiYear)
@@ -102,6 +100,7 @@ function VehicleInputComponent() {
         vehicleId: '',
         additional: ''
     })
+  
     const handleChange = e => { setUseForm({ ...useForm, [e.target.name]: e.target.value }) }
     var numPeople = parseInt(useForm.numberPeople)
     const calHour = () => {
@@ -159,14 +158,11 @@ function VehicleInputComponent() {
                                                     value={useForm.country}
                                                     onChange={handleChange}
                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                                    {/* <option value="">เลือกจังหวัดที่จะใช้บริการ</option>
-                                                    <option value="เชียงราย">เชียงราย</option>
-                                                    <option value="เชียงใหม่">เชียงใหม่</option>
-                                                    <option value="พะเยา">พะเยา</option> */}
+                                                    <option value="">เลือกจังหวัดที่จะใช้บริการ</option>
                                                     {
                                                         province_th.map(
                                                             function (data) {
-                                                                return <option key={data.id}>{data}</option>
+                                                                return <option key={data}>{data}</option>
                                                             }
                                                         )
                                                     }

@@ -188,7 +188,11 @@ function Filter() {
                                         {data.allVehicle.
                                             filter(
                                                 function (vehicle) {
+                                                    console.log(vehicle)
                                                     var num = parseInt(vehicle.numberPeople)
+                                                    if(vehicle.user.metadata[0].status === false){
+                                                        return null
+                                                    }
                                                     for (var i = 0; i < useForm.dateRange.length; i++) {
                                                         for (var j = 0; j < vehicle.user.workDay.length; j++) {
                                                             if (useForm.dateRange[i] === vehicle.user.workDay[j].date) {
@@ -208,7 +212,7 @@ function Filter() {
                                                                     } else
                                                                         if (numPeople < num) {
                                                                         } else
-                                                                            if (useForm.additional == "") {
+                                                                            if (useForm.additional === "ไม่มี" ||useForm.additional === "") {
                                                                                 return vehicle.country.indexOf(useForm.country) !== -1
                                                                             } else
                                                                                 return vehicle.country.indexOf(useForm.country) !== -1 && vehicle.additional.indexOf(useForm.additional) !== -1
