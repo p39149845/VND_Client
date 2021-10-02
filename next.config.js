@@ -1,5 +1,5 @@
 module.exports = {
   reactStrictMode: true,
-  future: { webpack5: false }
+  future: { webpack4: true }
 }
 

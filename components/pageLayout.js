@@ -5,7 +5,7 @@ import CustomerNav from './CustomerNav'
 import { AuthContext } from "../appState/AuthProvider"
 
 function PageLayout({ children }) {
-    const { user, signout } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     return (
         <div style={{ margin: "0" }}>
             <Head>
