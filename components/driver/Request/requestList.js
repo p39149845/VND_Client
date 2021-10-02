@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import ReguestItem from './reguestItem'
 import { ME } from '../../gql/query'
-import { waiting } from '../../requestStatus/status'
+import { waiting } from '../../DataState/status'
 import SideBar from '../../DsideBar'
 
 

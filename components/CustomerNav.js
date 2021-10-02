@@ -7,11 +7,6 @@ function CustomerNav() {
   const { user, signout } = useContext(AuthContext)
   console.log(user)
   const [active, setActive] = useState(false);
-
-  if(user){
-    console.log(user.status)
-}
-
   const handleClick = () => {
     setActive(!active);
   };

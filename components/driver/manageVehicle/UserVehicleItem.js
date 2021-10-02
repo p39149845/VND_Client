@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
-import fetch from 'isomorphic-unfetch'
 import Notification from '../../notification'
 import ConfirmDialog from '../../confirmDialog'
 import Modal from 'react-modal'
@@ -11,7 +10,7 @@ import { Carousel } from 'react-responsive-carousel';
 Modal.setAppElement('#__next')
 
 import { ME } from '../../gql/query'
-import { UPDATE_VEHICLE, DELETE_VEHICLE } from '../../gql/mutation'
+import { DELETE_VEHICLE } from '../../gql/mutation'
 
 const customStyles = {
     content: {
@@ -22,20 +21,11 @@ const customStyles = {
 };
 
 const UserVehicleItem = ({ vehicle }) => {
-    const [edit, setEdit] = useState(false)
-    const [file, setFile] = useState(null)
     const [vehicleData, setVehicle] = useState(vehicle)
     const [modalOpen, setModalOpen] = useState(false)
 
     const [notify, setnotify] = useState({ isOpen: false, message: '', type: '' })
     const [confirmDialog, setconfirmDialog] = useState({ isOpen: false, title: '', subTitle: '' })
-
-    const [updateVehicle, { loading, error }] = useMutation(UPDATE_VEHICLE, {
-        onCompleted: data => {
-            console.log(data)
-        },
-        refetchQueries: [{ query: ME }]
-    })
 
     const [deleteVehicle] = useMutation(DELETE_VEHICLE, {
         onCompleted: data => {
@@ -45,66 +35,6 @@ const UserVehicleItem = ({ vehicle }) => {
     })
     const openImg = (id) => {
         setModalOpen(!modalOpen)
-    }
-    const handleChange = e =>
-        setVehicle({ ...vehicleData, [e.target.name]: e.target.value })
-
-    const selectFile = e => {
-        const files = e.target.files
-        setFile(files[0])
-    }
-
-    const uploadFile = async () => {
-        const data = new FormData()
-        data.append('file', file)
-        data.append('upload_preset', 'project-492')
-
-        const res = await fetch(
-            'https://api.cloudinary.com/v1_1/project-492/image/upload',
-            {
-                method: 'post',
-                body: data
-            }
-        )
-        const result = await res.json()
-
-        return result.secure_url
-    }
-
-    const handleSubmit = async () => {
-        if (!file && vehicleData === vehicle) {
-            setVehicle(vehicle)
-            setEdit(false)
-            return
-        }
-
-        console.log(vehicleData)
-
-        try {
-            console.log(file)
-            if (file) {
-                const url = await uploadFile()
-                if (url) {
-                    await updateVehicle({
-                        variables: {
-                            ...vehicleData,
-                            imageUrl: url,
-                            price: +vehicleData.price
-                        }
-                    })
-                }
-            } else {
-                await updateVehicle({
-                    variables: {
-                        ...vehicleData,
-                        imageUrl: vehicleData.imageUrl,
-                        price: +vehicleData.price
-                    }
-                })
-            }
-        } catch (error) {
-            console.log(error)
-        }
     }
 
     const handleDelete = async () => {
@@ -127,129 +57,50 @@ const UserVehicleItem = ({ vehicle }) => {
 
     return (
         <div
-            style={{
-                display: 'grid',
-                gridTemplateColumns: '2fr 2fr 1fr 2fr 1fr',
-                width: '100%',
-                padding: "10px",
-                borderTop: '1px solid #CACACA',
-                borderBottom: '1px solid #CACACA'
-            }}
+            className="grid grid-cols-4 gap-4 border-3 p-1 text-center content-between text-xl"
         >
-            <div style={{ margin: 'auto' }}>
-                {!edit ? (
+            <div className="col-span-1 pt-5 font-bold">
+               
                     <h5>{vehicleData.description}</h5>
-                ) : (
-                    <input
-                        type='text'
-                        name='description'
-                        value={vehicleData.description}
-                        onChange={handleChange}
-                    />
-                )}
+               
             </div>
-            <div style={{ margin: 'auto' }}>
-                {!edit ? (
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: "column",
-                    }}>
-                        <img
-                            src={vehicleData.imageUrl[0]}
-                            alt={vehicleData.description}
-                            width='100vh'
-                            
-                        />
-                        <button
-                            className="btn btn-outline-success"
-                            onClick={openImg}
-                            >
-                            รูปภาพเพิ่มเติม
-                        </button>
-                    </div>
-                ) : (
-                    <input type='file' name='file' onChange={selectFile} />
-                )}
+            <div className="col-span-1 ">
+                <img
+                    src={vehicleData.imageUrl[0]}
+                    alt={vehicleData.description}
+                    className="object-contain h-20 w-full"
+                />
+                <button
+                    className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded"
+                    onClick={openImg}
+                >
+                    รูปภาพเพิ่มเติม
+                </button>
             </div>
-            <div style={{ margin: 'auto' }}>
-                {!edit ? (
+            <div className="col-span-1 pt-5">
+               
                     <h5>{vehicleData.price} บาท/วัน</h5>
-                ) : (
-                    <input
-                        type='number'
-                        name='price'
-                        value={vehicleData.price}
-                        onChange={handleChange}
-                    />
-                )}
+              
             </div>
             <div
-                style={{
-                    margin: 'auto',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}
+                className="col-span-1 pt-5"
             >
-                {!edit ? (
-                    <>
-                        <button
-                            style={{
-                                padding: '5px 10px',
-                                margin: "1vh"
-                            }}
-                            className="btn btn-outline-warning"
-                            onClick={() => setEdit(true)}
-                        >
-                            Edit
-                        </button>
-                        <button
-                            style={{
-                                margin: "1vh",
-                                padding: '5px 10px',
-                            }}
-                            className="btn btn-outline-danger"
-                            onClick={() =>
-                                setconfirmDialog({
-                                    isOpen: true,
-                                    title: "คุณต้องการลบรถตู้คันนี้หรือไม่?",
-                                    subTitle: "กรุณาตรวจสอบรายละเอียดให้ครบถ้วน",
-                                    onConfirm: () => {
-                                        handleDelete()
-                                    }
-                                })
+
+                <button
+                   className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded"
+                    onClick={() =>
+                        setconfirmDialog({
+                            isOpen: true,
+                            title: "คุณต้องการลบรถตู้คันนี้หรือไม่?",
+                            subTitle: "กรุณาตรวจสอบรายละเอียดให้ครบถ้วน",
+                            onConfirm: () => {
+                                handleDelete()
                             }
-                        >
-                            {loading ? 'Delete...' : error ? 'Error' : 'Delete'}
-                        </button>
-                    </>
-                ) : (
-                    <>
-                        <button
-                            style={{
-                                padding: '5px 10px',
-                                margin: "1vh"
-                            }}
-                            className="btn btn-outline-warning"
-                            onClick={() => {
-                                setVehicle(vehicle)
-                                setEdit(false)
-                            }}
-                        >
-                            Cancel Edit
-                        </button>
-                        <button
-                            style={{
-                                padding: '5px 10px',
-                                margin: "1vh"
-                            }}
-                            className="btn btn-outline-success"
-                            onClick={handleSubmit}
-                        >
-                            {loading ? 'Editing...' : 'Confirm Edit'}
-                        </button>
-                    </>
-                )}
+                        })
+                    }
+                >
+                    Delete
+                </button>
             </div>
             <Notification
                 notify={notify}
@@ -275,11 +126,10 @@ const UserVehicleItem = ({ vehicle }) => {
                 </button>
                 <div className="flex flex-col ">
                     <Carousel width="100%" showArrows emulateTouch useKeyboardArrows>
-
                         {vehicle &&
                             vehicle.imageUrl
                                 .map(img => (
-                                    <div key={img.id}>
+                                    <div key={img}>
                                         <img src={img}
                                             alt={vehicleData.description} />
                                     </div>

@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 import TestItem from './testItem'
 import VehicleItem from './vehicleItem'
 import Review from './review'
-import { reviewAndPayment } from '../../requestStatus/status'
+import { reviewAndPayment } from '../../DataState/status'
 
 Modal.setAppElement('#__next')
 

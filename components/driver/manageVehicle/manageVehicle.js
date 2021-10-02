@@ -4,6 +4,7 @@ import fetch from 'isomorphic-unfetch'
 import Notification from '../../notification'
 import { QUERY_ALLVEHICLE, ME } from '../../gql/query'
 import { CREATE_VEHICLE } from '../../gql/mutation'
+import { province_th } from '../../DataState/ThaiCountry'
 
 function CreateMetadata() {
 
@@ -121,7 +122,7 @@ function CreateMetadata() {
         <div>
             <div className="hidden sm:block " aria-hidden="true">
                 <div className=" pb-3 grid justify-center">
-                    <div className="text-5xl">ลงทะเบียนรถ</div>
+                    <div className="text-5xl">เพิ่มรถ</div>
                 </div>
             </div>
             <div className="mt-10 sm:mt-0">
@@ -141,7 +142,7 @@ function CreateMetadata() {
                                             <input
                                                 type="text"
                                                 name="description"
-                                                placeholder="สมชาย"
+                                                placeholder="Nissan Urvan"
                                                 value={vehicleData.description}
                                                 onChange={handleChange}
                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
@@ -149,13 +150,20 @@ function CreateMetadata() {
 
                                         <div className="col-span-6 sm:col-span-3">
                                             <label className="block text-sm font-medium text-gray-700">จังหวัดที่ให้บริการ</label>
-                                            <input
-                                                type="text"
-                                                name="country"
-                                                placeholder="ยอดรัก"
-                                                value={vehicleData.country}
-                                                onChange={handleChange}
-                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                            <select
+                                                    name="country"
+                                                    value={vehicleData.country}
+                                                    onChange={handleChange}
+                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                        <option value="">เลือกจังหวัด</option>
+                                                    {
+                                                        province_th.map(
+                                                            function (data) {
+                                                                return <option key={data.id} value={data}>{data}</option>
+                                                            }
+                                                        )
+                                                    }
+                                                </select>
                                         </div>
 
                                         <div className="col-span-6 sm:col-span-4">
@@ -269,14 +277,14 @@ function CreateMetadata() {
                                                 />
                                                 <button
                                                     type="button"
-                                                    className="btn btn-success"
+                                                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-30"
                                                     onClick={uploadReqBook}
                                                 >
                                                     อัพโหลดรูปภาพ
                                                 </button>
 
-                                                {loadImage ? <
-                                                    div className="mt-1 flex justify-center px-3 pt-3 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                                {loadImage ? 
+                                                <div className="mt-1 flex justify-center px-3 pt-3 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                                     <div className="space-y-1 text-center">
                                                         <h3>Loading . . .</h3>
                                                     </div>
@@ -303,7 +311,7 @@ function CreateMetadata() {
                                             />
                                             <button
                                                 type="button"
-                                                className="btn btn-success"
+                                                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-30"
                                                 onClick={upload}
                                             >
                                                 อัพโหลดรูปภาพ
@@ -323,7 +331,7 @@ function CreateMetadata() {
                                                                 src={img}
                                                                 width="150px"
                                                                 alt="img"
-                                                                key={img.id} />
+                                                                key={img} />
                                                         )
                                                         }
 

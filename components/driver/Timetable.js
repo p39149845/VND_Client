@@ -5,7 +5,7 @@ import { ME } from '../gql/query'
 
 function TimeTable() {
     const { user } = useContext(AuthContext)
-    const { data, loading, error } = useQuery(ME)
+
     var head = new Array
     var thaiformat = new Array
     const workDays = new Array()
@@ -113,17 +113,13 @@ function TimeTable() {
         } else state.day7 = false
     }
 
-    // console.log(state)
-    console.log("dateArray", dateArray)
-    // console.log("workDays", DateSorting)
-
     return (
         <div className="w-2/3 mx-auto">
             <div className="bg-white shadow-md rounded my-6">
                 <table className="text-left w-full border-collapse">
                     <thead>
                         <tr>
-                            <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light"></th>
+                            <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">อาทิตย์</th>
                             <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">วันที่</th>
                         </tr>
                     </thead>

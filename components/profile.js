@@ -7,16 +7,10 @@ import { ME } from '../components/gql/query'
 // import Image from 'next/image'
 
 function Profile() {
-    const { User } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const { data, loading, error } = useQuery(ME)
 
-    const ageCalculator = data &&
-        data.user.metadata &&
-        data.user.metadata.map((metadataSet) => metadataSet.dateOfBirth);
-
-    let ageFromString = new AgeFromDateString(ageCalculator).age;
-
-    console.log("value from ageFromString", ageFromString);
+    let ageFromString = new AgeFromDateString(user.metadata[0].dateOfBirth).age;
     return (
         <div className="min-w-screen bg-gray-100">
             <div className="container mx-auto pt-5">
@@ -28,7 +22,7 @@ function Profile() {
                     data.user.metadata
                         .map(metadataSet =>
                         (
-                            <div className="md:flex no-wrap md:-mx-2 " key={metadataSet.id}>
+                            <div key={metadataSet.id} className="md:flex no-wrap md:-mx-2 " >
                                 <div className="w-full md:w-3/12 md:mx-2 pt-5">
                                     <div className="bg-white p-3 border-t-4 border-green-400">
                                         <div className="image overflow-hidden">
@@ -100,7 +94,7 @@ function Profile() {
                         ))}
             </div>
             {
-                User && User.metadata[0].status === true ?
+                user && user.metadata[0].status === true ?
                     <div className="container p-5 bg-gray-100">
                         <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-black ">
                             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">ตารางงาน</h1>

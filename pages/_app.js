@@ -26,6 +26,7 @@ const QUERY_USER = {
         metadata{
           status
           userName
+          dateOfBirth
           user{
             id
             name

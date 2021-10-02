@@ -13,39 +13,23 @@ const UserVehicle = () => {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
-    <div style={{ width: '70%', margin: 'auto', marginBottom: '50px' }}>
-      {/* Header */}
-
-      <h1
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          marginTop: "5vh",
-          marginBottom: "5vh",
-        }}>จัดการรถตู้</h1>
-
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '2fr 2fr 1fr 2fr 1fr',
-          widht: '100%',
-          marginBottom: "3%"
-        }}
-      >
-        <h3 style={{ margin: 'auto' }}>Description</h3>
-        <h3 style={{ margin: 'auto' }}>Picture</h3>
-        <h3 style={{ margin: 'auto' }}>Price</h3>
-        <h3 style={{ margin: 'auto' }}>Actions</h3>
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+      <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-black">
+        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รายการรถตู้</h1>
         <button
-          className="btn btn-success"
-          style={{
-
-            margin: "1vh",
-            alignSelf: "flex-start",
-          }}
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-30"
           onClick={() => setModalOpen(true)}>เพิ่มรถ
         </button>
+      </div>
+
+      <div
+        className="grid grid-cols-4 gap-4 bg-gray-400 rounded-md p-4 mt-5 text-center text-2xl text-white"
+      >
+        <h3 className="col-span-1 ">รุ่นรถ</h3>
+        <h3 className="col-span-1 ">รูปภาพรถ</h3>
+        <h3 className="col-span-1 ">ราคา</h3>
+        <h3 className="col-span-1 "></h3>
+
       </div>
 
       {data &&
@@ -59,7 +43,7 @@ const UserVehicle = () => {
         isOpen={modalOpen}
       >
         <button
-          className="btn btn-danger"
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-30"
           style={{
 
             margin: "1vh",
@@ -69,7 +53,7 @@ const UserVehicle = () => {
         </button>
         <ManageVehicle />
       </Modal>
-    </div>
+    </main>
   )
 }
 

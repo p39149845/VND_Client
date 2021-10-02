@@ -1,4 +1,4 @@
-import { waiting, accept, reject, startTrip, reviewAndPayment, finish } from '../../requestStatus/status'
+import { waiting, accept, reject, startTrip, reviewAndPayment, finish } from '../../DataState/status'
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { UPDATE_REQUEST, CREATE_WORKDAY } from '../../gql/mutation'

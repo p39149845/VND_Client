@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { ME } from '../../gql/query'
 import ReguestItem from './reguestItem'
-import { reviewAndPayment } from '../../requestStatus/status'
+import { reviewAndPayment } from '../../DataState/status'
 import SideBar from '../../DsideBar'
 
 function RequestList2() {

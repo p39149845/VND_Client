@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { ME } from '../../gql/query'
 import ReguestItem from './reguestItem'
-import { accept, startTrip } from '../../requestStatus/status'
+import { accept, startTrip } from '../../DataState/status'
 import SideBar from '../../sideBar'
 function RequestList1() {
 
@@ -13,7 +13,7 @@ function RequestList1() {
     <div className="bg-gray-100 min-h-screen">
       <div>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-gray-200">
+          <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-black">
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รายการจองรถ</h1>
           </div>
 

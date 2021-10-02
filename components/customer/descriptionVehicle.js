@@ -90,7 +90,6 @@ function TestFilter({ vehicle, useForm }) {
                                         .map(img => (
                                             <div key={img.id}>
                                                 <img
-                                                    alt="ecommerce"
                                                     className=" w-full object-cover object-center rounded border border-gray-200"
                                                     src={img} alt={vehicleData.description} />
                                             </div>

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Router from 'next/router'
 import DatePicker, { registerLocale } from "react-datepicker";
 
+import { province_th } from '../../DataState/ThaiCountry'
+
 import th from "date-fns/locale/th"; // the locale you want
 registerLocale("th", th); // register it with the name you want
 
@@ -16,6 +18,8 @@ function VehicleInputComponent() {
     let msInDate = 1000 * 3600 * 24
     var hourResult = Math.ceil(diff / msInDate)
     var diffTime = ((stopTime * 1) - (startTime * 1)) / 3600000
+
+    console.log(province_th)
 
     Date.prototype.addDays = function (days) {
         var dat = new Date(this.valueOf())
@@ -131,10 +135,10 @@ function VehicleInputComponent() {
     }
     return (
         <div className="bg-gray-100">
-           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
-                    <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-black">
-                        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รายการรถตู้</h1>
-                    </div>
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+                <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-black">
+                    <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รายการรถตู้</h1>
+                </div>
                 <div className="mt-5">
 
                     <div className="md:grid md:grid-cols-5 ">
@@ -155,10 +159,17 @@ function VehicleInputComponent() {
                                                     value={useForm.country}
                                                     onChange={handleChange}
                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                                    <option value="">เลือกจังหวัดที่จะใช้บริการ</option>
+                                                    {/* <option value="">เลือกจังหวัดที่จะใช้บริการ</option>
                                                     <option value="เชียงราย">เชียงราย</option>
                                                     <option value="เชียงใหม่">เชียงใหม่</option>
-                                                    <option value="พะเยา">พะเยา</option>
+                                                    <option value="พะเยา">พะเยา</option> */}
+                                                    {
+                                                        province_th.map(
+                                                            function (data) {
+                                                                return <option key={data.id}>{data}</option>
+                                                            }
+                                                        )
+                                                    }
                                                 </select>
                                             </div>
 
