@@ -6,7 +6,7 @@ import fetch from "isomorphic-unfetch"
 import withApollo from "next-with-apollo"
 import cookie from "cookie"
 
-const uri = "https://git.heroku.com/server492.com"
+const uri = "https://server492.herokuapp.com/graphql"
 
 const httpLink = createHttpLink({ uri, fetch })
 
