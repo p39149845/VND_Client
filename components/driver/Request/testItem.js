@@ -114,7 +114,7 @@ function TestItem({ request }) {
                 status: accept,
             }
         })
-        for (var i = 0; i < (calRange+1); i++) {
+        for (var i = 0; i < (calRange + 1); i++) {
             await createWorkDay({
                 variables: {
                     date: dateArr[i]
@@ -161,6 +161,9 @@ function TestItem({ request }) {
     return (
         <div>
             <div className="container mx-auto p-5">
+                <div className=" z-10 flex items-baseline justify-between pb-6 border-b border-black">
+                    <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รายละเอียด</h1>
+                </div>
                 <div className="md:flex no-wrap md:-mx-2 ">
                     <div className="w-full md:w-3/12 md:mx-2">
 
@@ -224,6 +227,10 @@ function TestItem({ request }) {
                                     <div className="grid grid-cols-2">
                                         <div className="px-4 py-2 font-semibold">ราคา</div>
                                         <div className="px-4 py-2">{request.cost}</div>
+                                    </div>
+                                    <div className="grid grid-cols-2">
+                                        <div className="px-4 py-2 font-semibold">บริการพิเศษ</div>
+                                        <div className="px-4 py-2">{request.targetVehicle.additional[0]}</div>
                                     </div>
                                 </div>
                             </div>

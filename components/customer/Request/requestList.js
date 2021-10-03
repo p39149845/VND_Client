@@ -1,72 +1,73 @@
-import React from 'react'
-import { useQuery } from '@apollo/react-hooks'
-import { ME } from '../../gql/query'
-import ReguestItem from './reguestItem'
-import { waiting, reject } from '../../DataState/status'
-import SideBar from '../../sideBar'
+import React,{ useState } from 'react'
+import Modal from 'react-modal'
+import TestItem from './testItem'
+Modal.setAppElement('#__next')
 
-function RequestList() {
+function ReguestItem({ request }) {
+   
+    const [Request, useRequest] = useState(request)
+    const [modalOpen, setModalOpen] = useState(false)
+    const modalIsOpen = () => {
+        setModalOpen(!modalOpen)
+    }
+    return (
+        <div className="bg-white divide-y divide-gray-200 min-w-screen overflow-x-scroll">
 
-  const { data, loading, error } = useQuery(ME, { fetchPolicy: 'no-cache' })
-  return (
-    <div className="bg-gray-100 min-h-screen">
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-black">
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รายการจองรถ</h1>
-          </div>
-
-          <section aria-labelledby="products-heading" className="pt-6 pb-24 ">
-            <div className="grid grid-cols-1 lg:grid-cols-10 gap-x-8 gap-y-10 min-w-screen">
-              <div className="lg:col-span-1"></div>
-              <div className="lg:col-span-8"><SideBar />
-                <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full">
-                  <div className="flex flex-col">
-                    <div className="flex flex-row md:grid md:grid-cols-12 rounded-md bg-blue-500 text-white">
-                      <div className="px-6 py-4 whitespace-nowrap md:col-span-2">
-                        คนขับรถ
-                      </div>
-                      <div className="px-6 py-4 whitespace-nowrap md:col-span-3">
-                        สถานะ
-                      </div>
-                      <div className="px-6 py-4 whitespace-nowrap md:col-span-2">
-                        วันที่เริ่มเดินทาง
-                      </div>
-                      <div className="px-6 py-4 whitespace-nowrap md:col-span-2">
-                        วันที่จบการเดินทาง
-                      </div>
-                      <div className="px-6 py-4 whitespace-nowrap md:col-span-1">
-                        ราคา
-                      </div>
-                      <div className="px-6 py-4 whitespace-nowrap md:col-span-2">
-
-                      </div>
+            <div className="flex flex-row md:grid-cols-12" key={Request.id}>
+                <div className="px-6 py-4 whitespace-nowrap md:col-span-2">
+                    <div className="flex items-center">
+                        <div className="ml-4">
+                            <div className="text-sm font-medium text-gray-900">
+                                {request.targetUser.metadata[0].userName}
+                            </div>
+                        </div>
                     </div>
-
-                    {data &&
-                      data.user &&
-                      data.user.requests &&
-                      data.user.requests
-                        .filter(
-                          function (requests) {
-                            if (requests.status === waiting || requests.status == reject) {
-                              return requests
-                            }
-                          }
-                        )
-                        .map(request => (
-                          <ReguestItem request={request} key={request.id} />
-                        ))}
-
-                  </div>
                 </div>
-              </div>
-              <div className="lg:col-span-1"></div>
-            </div>
+                <div className="px-6 py-4 whitespace-nowrap md:col-span-3">
+                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                        {request.status}
+                    </span>
+                </div>
+                <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:col-span-2">
+                    {Request.startDate}
+                </div>
+                <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:col-span-2">
+                    {Request.stopDate}
+                </div>
+                <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:col-span-1">
+                    {request.cost}
+                </div>
+                <div className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium md:col-span-2">
+                    <button
+                        onClick={modalIsOpen}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        รายละเอียด
+                    </button>
+                </div>
+                <Modal
+                    isOpen={modalOpen}
+                >
+                    <div className="flex flex-column min-h-screen min-w-screen text-white bg-gray-100 contain-center">
+                        <button
+                            className="btn btn-danger"
+                            style={{
 
-          </section>
-        </main>
-      </div>
-  )
+                                margin: "1vh",
+                                alignSelf: "flex-start",
+                            }}
+                            onClick={modalIsOpen}>X
+                        </button>
+                        <TestItem key={Request.id} request={request} />
+                    </div>
+                </Modal>
+            </div>
+        </div>
+
+
+
+
+    )
 }
 
-export default RequestList
+export default ReguestItem

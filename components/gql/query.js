@@ -23,6 +23,7 @@ export const ME = gql`
       id
       description
       price
+      additional
       imageUrl
       numberPeople
       foodDrink

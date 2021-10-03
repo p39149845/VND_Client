@@ -98,13 +98,14 @@ function TimeTable() {
         <div className="bg-gray-100">
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
 
-                <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-black">
+                <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 mb-5 border-b border-black">
                     <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">ตารางงาน</h1>
                 </div>
-                <table className="text-left w-full border-collapse bg-white ">
-                    <thead className="bg-green-300">
+
+                <table className="text-left w-full border-collapse bg-white pt-6">
+                    <thead className="bg-blue-400">
                         <tr>
-                            <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">อาทิตย์</th>
+                            <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">สัปดาห์</th>
                             <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">วันที่</th>
                         </tr>
                     </thead>

@@ -27,7 +27,7 @@ function DriverNav() {
 
                 </a>
             </Link>
-            <span className='text-base text-white px-10 uppercase tracking-wide'>
+            <span className='text-base text-white pl-5 uppercase tracking-wide'>
                 สถานะ : คนขับรถ
             </span>
             <button
