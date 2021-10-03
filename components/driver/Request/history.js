@@ -5,7 +5,7 @@ import { ME } from '../../gql/query'
 import SideBar from '../../DsideBar'
 
 
-function history() {
+function History() {
 
   const { data, loading, error } = useQuery(ME)
 
@@ -64,4 +64,4 @@ function history() {
   )
 }
 
-export default history
+export default History
