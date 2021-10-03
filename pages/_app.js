@@ -3,6 +3,7 @@ import { ApolloProvider } from "@apollo/react-hooks"
 import fetch from "isomorphic-unfetch"
 import cookie from "cookie"
 import '../styles/globals.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
 import PageLayout from "../components/PageLayout"
 import AuthProvider from "../appState/AuthProvider"
