@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { AuthContext } from "../appState/AuthProvider"
 import { useQuery } from '@apollo/react-hooks'
 import { AgeFromDateString } from 'age-calculator'
-import TimeTable from './driver/TimeTable'
 import { ME } from '../components/gql/query'
 
 function Profile() {
@@ -92,16 +91,6 @@ function Profile() {
                             </div>
                         ))}
             </div>
-            {
-                user && user.metadata[0].status === true ?
-                    <div className="container p-5 bg-gray-100">
-                        <div className=" z-10 flex items-baseline justify-between pt-10 pb-6 border-b border-black ">
-                            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">ตารางงาน</h1>
-                        </div>
-                        <TimeTable />
-                    </div>
-                    : null
-            }
         </div>
     )
 }
