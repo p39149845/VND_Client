@@ -1,6 +1,6 @@
 import React from "react"
 
-import SignUpUserComponent from "../components/SignInUp/signUpDriver_Component"
+import SignUpUserComponent from "../components/signInUp/signUpDriver_Component"
 
 
 const SignUpUser = () => {
