@@ -4,7 +4,6 @@ import { useQuery } from '@apollo/react-hooks'
 import { AgeFromDateString } from 'age-calculator'
 import TimeTable from './driver/TimeTable'
 import { ME } from '../components/gql/query'
-// import Image from 'next/image'
 
 function Profile() {
     const { user } = useContext(AuthContext)

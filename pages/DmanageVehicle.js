@@ -1,5 +1,5 @@
 import React from 'react'
-import UserVehicle from '../components/driver/manageVehicle/UserVehicle'
+import UserVehicle from '../components/driver/manageVehicle/userVehicle'
 
 function DmanageVehicle() {
     return (
