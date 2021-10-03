@@ -5,7 +5,7 @@ import cookie from "cookie"
 import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
 
-import PageLayout from "../components/PageLayout"
+import PageLayout from "../components/pageLayout"
 import AuthProvider from "../appState/AuthProvider"
 import apolloClient from "../apollo/apolloClient"
 
