@@ -109,6 +109,11 @@ function SignUp() {
                     </div>
                 </div>
             </div>
+            <div className="w-30 m-auto text-center">
+                {error && (
+                    <p className="text-red-500">{error.graphQLErrors[0].message}</p>
+                )}
+            </div>
         </div>
     )
 }

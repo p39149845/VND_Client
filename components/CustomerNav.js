@@ -28,7 +28,7 @@ function CustomerNav() {
       </Link>
       {
         user && <>
-          <span className='text-base text-white px-5 uppercase tracking-wide'>
+          <span className='text-base text-white pl-5 uppercase tracking-wide'>
             สถานะ : ผู้โดยสาร
           </span>
         </>

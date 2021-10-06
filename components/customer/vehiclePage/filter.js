@@ -23,15 +23,15 @@ function Filter() {
 
     const handleTv = (e) => {
         setOptional({ ...optional, tv: !optional.tv });
-        
+
     }
     const handleKaraoke = (e) => {
         setOptional({ ...optional, karaoke: !optional.karaoke });
-        
+
     }
     const handleGps = (e) => {
         setOptional({ ...optional, gps: !optional.gps });
-       
+
     }
     const handleFood = (e) => {
         setOptional({ ...optional, foodDrink: !optional.foodDrink });
@@ -57,27 +57,27 @@ function Filter() {
                             <form className=" lg:block">
                                 <ul role="list" className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200">
                                     <li>
-                                        <a className="font-black text-lg">
+                                        <div className="text-black text-lg">
                                             จังหวัด: <span className="font-light text-base">{useForm.country}</span>
-                                        </a>
+                                        </div>
                                     </li>
 
                                     <li>
-                                        <a className="font-black text-lg">
+                                        <div className="text-black text-lg">
                                             จำนวนผู้โดยสาร: <span className="font-light text-base">  {useForm.numberPeople}  คน</span>
-                                        </a>
+                                        </div>
                                     </li>
 
                                     <li>
-                                        <a className="font-black text-lg">
+                                        <div className="text-black text-lg">
                                             วันที่เริ่มเดินทาง: <span className="font-light text-base">{useForm.startDate}</span>
-                                        </a>
+                                        </div>
                                     </li>
 
                                     <li>
-                                        <a className="font-black text-lg">
+                                        <div className="text-black text-lg">
                                             วันที่จบการเดินทาง: <span className="font-light text-base">{useForm.stopDate}</span>
-                                        </a>
+                                        </div>
                                     </li>
                                 </ul>
 
@@ -166,21 +166,20 @@ function Filter() {
                                 </div>
                             </form>
                             <div className="lg:col-span-3">
-                                <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full">
+                                <div className="border-4 border-dashed border-gray-200 rounded-lg lg:h-full">
                                     <div className="flex flex-col">
-
-                                        <div className="flex flex-row md:grid md:grid-cols-6 bg-blue-500 text-white">
-                                            <div className="px-6 py-4 whitespace-nowrap md:col-span-2">
+                                        <div className="flex flex-row grid grid-cols-7 rounded-md bg-blue-500 text-white overflow-x-auto">
+                                            <div className="px-6 py-4 whitespace-nowrap col-span-3">
                                                 รายละเอียดรถ
                                             </div>
 
-                                            <div className="px-6 py-4 whitespace-nowrap md:col-span-1">
+                                            <div className="px-6 py-4 whitespace-nowrap col-span-1">
                                                 สถานะ
                                             </div>
-                                            <div className="px-6 py-4 whitespace-nowrap md:col-span-1">
+                                            <div className="px-6 py-4 whitespace-nowrap col-span-1">
                                                 ราคา
                                             </div>
-                                            <div className="md:col-span-2">
+                                            <div className="col-span-2">
 
                                             </div>
                                         </div>
@@ -190,7 +189,7 @@ function Filter() {
                                                 function (vehicle) {
                                                     console.log(vehicle)
                                                     var num = parseInt(vehicle.numberPeople)
-                                                    if(vehicle.user.metadata[0].status === false){
+                                                    if (vehicle.user.metadata[0].status === false) {
                                                         return null
                                                     }
                                                     for (var i = 0; i < useForm.dateRange.length; i++) {
@@ -212,7 +211,7 @@ function Filter() {
                                                                     } else
                                                                         if (numPeople < num) {
                                                                         } else
-                                                                            if (useForm.additional === "ไม่มี" ||useForm.additional === "") {
+                                                                            if (useForm.additional === "ไม่มี" || useForm.additional === "") {
                                                                                 return vehicle.country.indexOf(useForm.country) !== -1
                                                                             } else
                                                                                 return vehicle.country.indexOf(useForm.country) !== -1 && vehicle.additional.indexOf(useForm.additional) !== -1

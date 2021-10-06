@@ -13,7 +13,6 @@ function ReguestItem({ request }) {
     const modalIsOpen = () => {
         setModalOpen(!ModalOpen)
     }
-    console.log(request)
     return (
         <div className="bg-white divide-y divide-gray-200">
             <div className="flex flex-row md:grid md:grid-cols-12 overflow-x-auto" key={Request.id}>
@@ -21,7 +20,7 @@ function ReguestItem({ request }) {
                     <div className="flex items-center">
                         <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900">
-                                {request.targetUser.metadata[0].userName}
+                                {request.user.name}
                             </div>
                         </div>
                     </div>

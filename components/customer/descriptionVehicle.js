@@ -79,9 +79,8 @@ function TestFilter({ vehicle, useForm }) {
     console.log(StarV, lengthStarV)
     return (
         <div>
-
             <section className="text-gray-700 body-font overflow-hidden bg-white">
-                <div className="container px-5  mx-auto">
+                <div className="container ">
                     <div className="md:grid md:grid-cols-10 py-8">
                         <div className="md:col-span-5 ">
                             <Carousel width="100%" showArrows emulateTouch useKeyboardArrows>
@@ -126,24 +125,25 @@ function TestFilter({ vehicle, useForm }) {
                                     <p className="leading-relaxed">เพศ : {metadata[0].gender}</p>
                                     <p className="leading-relaxed">จังหวัดที่ให้บริการ : {vehicleData.country}</p>
                                     <p className="leading-relaxed">จำนวนที่นั่ง : {vehicleData.numberPeople}</p>
-                                    <div className='border-1 rounded-md mt-2' >
+                                    <div className="leading-relaxed flex flex-row" >
+                                        อุปกรณ์บนรถตู้ :
                                         {vehicleData.tv ?
-                                            <span >TV : มี </span>
+                                            <span >TV ,</span>
                                             :
                                             null
                                         }
                                         {vehicleData.karaoke ?
-                                            <p >คาราโอเกะ : มี</p>
+                                            <p >คาราโอเกะ ,</p>
                                             :
                                             null
                                         }
                                         {vehicleData.gps ?
-                                            <p >Gps :  มี</p>
+                                            <p >Gps ,</p>
                                             :
                                             null
                                         }
                                         {vehicleData.foodDrink ?
-                                            <p >อาหารและเครื่องดืม :  มี</p>
+                                            <p >อาหารและเครื่องดืม ,</p>
                                             :
                                             null
                                         }

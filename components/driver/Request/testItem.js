@@ -13,12 +13,16 @@ function TestItem({ request }) {
     )
 
     const [Request] = useState(request)
-    console.log(request)
+
 
     console.log(Request.startDate)
     var SrangeDate = (Request.startDate.toString()).split("|").slice(0, 1)
     var ErangeDate = (Request.stopDate.toString()).split("|").slice(0, 1)
 
+    var SrangeTime = (Request.startDate.toString()).split("|").slice(1, 2)
+    var ErangeTime = (Request.stopDate.toString()).split("|").slice(1, 2)
+    console.log("ErangeTime",ErangeTime)
+    
     var Srange = (SrangeDate.toString()).split("/").slice(0, 3)
     var Erange = (ErangeDate.toString()).split("/").slice(0, 3)
 
@@ -160,11 +164,11 @@ function TestItem({ request }) {
 
     return (
         <div>
-            <div className="container mx-auto p-5">
+            <div className="container">
                 <div className=" z-10 flex items-baseline justify-between pb-6 border-b border-black">
                     <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รายละเอียด</h1>
                 </div>
-                <div className="md:flex no-wrap md:-mx-2 ">
+                <div className="md:flex no-wrap md:-mx-2">
                     <div className="w-full md:w-3/12 md:mx-2">
 
                         <div className="bg-white p-3 border-t-4 border-green-400">
@@ -178,9 +182,9 @@ function TestItem({ request }) {
                         <div className="my-4"></div>
                     </div>
 
-                    <div className="w-full md:w-9/12 mx-2 h-64">
+                    <div className="w-full md:w-9/12">
 
-                        <div className="bg-white p-3 shadow-sm rounded-sm">
+                        <div className="bg-white p-3 shadow-sm rounded-sm sm:flex-col">
                             <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                                 <span clas="text-green-500">
                                     <svg className="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -214,11 +218,23 @@ function TestItem({ request }) {
                                     </div>
                                     <div className="grid grid-cols-2">
                                         <div className="px-4 py-2 font-semibold">วันที่เริ่มเดินทาง</div>
-                                        <div className="px-4 py-2">{request.startDate}</div>
+                                        <div className="px-4 py-2">{SrangeDate}</div>
+                                    </div>
+                                    <div className="grid grid-cols-2">
+                                        <div className="px-4 py-2 font-semibold">เวลา</div>
+                                        <div className="px-4 py-2">{SrangeTime}</div>
                                     </div>
                                     <div className="grid grid-cols-2">
                                         <div className="px-4 py-2 font-semibold">วันที่จบการเดินทาง</div>
-                                        <div className="px-4 py-2">{request.stopDate}</div>
+                                        <div className="px-4 py-2">{ErangeDate}</div>
+                                    </div>
+                                    <div className="grid grid-cols-2">
+                                        <div className="px-4 py-2 font-semibold">เวลา</div>
+                                        <div className="px-4 py-2">{ErangeTime}</div>
+                                    </div>
+                                    <div className="grid grid-cols-2">
+                                        <div className="px-4 py-2 font-semibold">เวลาเดินทาง</div>
+                                        <div className="px-4 py-2">{dateArr.length} วัน</div>
                                     </div>
                                     <div className="grid grid-cols-2">
                                         <div className="px-4 py-2 font-semibold">รายละเอียดเพิ่มเติม</div>

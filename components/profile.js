@@ -8,7 +8,11 @@ function Profile() {
     const { user } = useContext(AuthContext)
     const { data, loading, error } = useQuery(ME)
 
-    let ageFromString = new AgeFromDateString(user.metadata[0].dateOfBirth).age;
+    const ageCalculator = data &&
+        data.user.metadata &&
+        data.user.metadata.map((metadataSet) => metadataSet.dateOfBirth);
+
+    let ageFromString = new AgeFromDateString(ageCalculator).age;
     return (
         <div className="min-w-screen bg-gray-100">
             <div className="container mx-auto pt-5">

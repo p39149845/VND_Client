@@ -61,7 +61,7 @@ function LogIn() {
                         >
                             Sign in with Google
                         </a>
-                       
+
                     </button>
 
                 </div>
@@ -85,6 +85,11 @@ function LogIn() {
                         <button className="bg-indigo-600 block mx-auto text-white text-sm uppercase rounded shadow-md px-6 py-2" type='button' onClick={handleSubmit}>เข้าสู่ระบบ</button>
                     </div>
                 </div>
+            </div>
+            <div className="w-30 m-auto text-center">
+                {error && (
+                    <p className="text-red-500">{error.graphQLErrors[0].message}</p>
+                )}
             </div>
         </div>
     )

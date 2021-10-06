@@ -47,20 +47,27 @@ function VehicleItem({ request }) {
                                     <div className="px-4 py-2">{request.targetVehicle.country}</div>
                                 </div>
                                 <div className="grid grid-cols-2">
-                                    <div className="px-4 py-2 font-semibold">อาหารและเครื่องดืม :</div>
-                                    <div className="px-4 py-2">{request.targetVehicle.foodDrink}</div>
+                                    <div className="px-4 py-2 font-semibold">อุปกรณ์บนรถ :</div>
+                                    {
+                                        request.targetVehicle.fooddrink ?
+                                        <div className="px-4 py-2">อาหารและเครื่องดืม ,</div>: null
+                                    } 
+                                    {
+                                        request.targetVehicle.tv ?
+                                        <div className="px-4 py-2">TV ,</div>: null
+                                    }
+                                    {
+                                        request.targetVehicle.gps ?
+                                        <div className="px-4 py-2">GPS ,</div>: null
+                                    }
+                                    {
+                                        request.targetVehicle.karaoke ?
+                                        <div className="px-4 py-2">คาราโอเกะ </div>: null
+                                    }
                                 </div>
                                 <div className="grid grid-cols-2">
-                                    <div className="px-4 py-2 font-semibold">TV :</div>
-                                    <div className="px-4 py-2">{request.targetVehicle.tv}</div>
-                                </div>
-                                <div className="grid grid-cols-2">
-                                    <div className="px-4 py-2 font-semibold">GPS :</div>
-                                    <div className="px-4 py-2">{request.targetVehicle.gps}</div>
-                                </div>
-                                <div className="grid grid-cols-2">
-                                    <div className="px-4 py-2 font-semibold">คาราโอเกะ :</div>
-                                    <div className="px-4 py-2">{request.targetVehicle.karaoke}</div>
+                                    <div className="px-4 py-2 font-semibold">บริการเสริมเพิ่มเติม</div>
+                                    <div className="px-4 py-2">{request.targetVehicle.additional}</div>
                                 </div>
                                 <div className="grid grid-cols-2">
                                     <div className="px-4 py-2 font-semibold">ราคาเริ่มต้น :</div>

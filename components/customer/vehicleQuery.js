@@ -35,8 +35,8 @@ function VehicleQuery({ vehicle, useForm, hourResult, diffTime }) {
     return (
         <div className="bg-white divide-y divide-gray-200">
 
-            <div className="flex flex-row md:grid md:grid-cols-6 overflow-x-auto">
-                <div className="px-6 py-4 whitespace-nowrap md:col-span-2">
+            <div className="flex flex-row md:grid md:grid-cols-7 overflow-x-auto">
+                <div className="px-6 py-4 whitespace-nowrap md:col-span-3">
                     <div className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-15">
                             <img className="h-full w-full"
@@ -53,8 +53,6 @@ function VehicleQuery({ vehicle, useForm, hourResult, diffTime }) {
                         </div>
                     </div>
                 </div>
-
-
                 <div className="px-6 py-4 whitespace-nowrap md:col-span-1">
                     <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                         Active

@@ -31,7 +31,7 @@ const UserVehicle = () => {
           <div className="grid grid-cols-1 lg:grid-cols-10 gap-x-8 gap-y-10 min-w-screen">
             <div className="lg:col-span-1"></div>
             <div className="lg:col-span-8">
-              <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full">
+              <div className="border-4 border-dashed border-gray-200 rounded-lg lg:h-full">
                 <div className="flex flex-col">
 
                   {data &&
