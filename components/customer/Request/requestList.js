@@ -3,7 +3,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import ReguestItem from './reguestItem'
 import { ME } from '../../gql/query'
 import { waiting } from '../../DataState/status'
-import SideBar from '../../DsideBar'
+import SideBar from '../../sideBar'
 
 
 function RequestList() {

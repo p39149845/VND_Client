@@ -40,7 +40,7 @@ function Filter() {
 
     const { data, loading, error } = useQuery(QUERY_ALLVEHICLE)
     if (loading) return <p>Loading...</p>
-
+    
     return (
         <div className="bg-white ">
             <div>
@@ -185,40 +185,41 @@ function Filter() {
                                         </div>
 
                                         {data.allVehicle.
-                                            filter(
-                                                function (vehicle) {
-                                                    console.log(vehicle)
-                                                    var num = parseInt(vehicle.numberPeople)
-                                                    if (vehicle.user.metadata[0].status === false) {
-                                                        return null
-                                                    }
-                                                    for (var i = 0; i < useForm.dateRange.length; i++) {
-                                                        for (var j = 0; j < vehicle.user.workDay.length; j++) {
-                                                            if (useForm.dateRange[i] === vehicle.user.workDay[j].date) {
-                                                                return null
-                                                            }
-                                                        }
-                                                    }
-                                                    if (optional.tv === true && vehicle.tv === false) {
-                                                    } else
-                                                        if (optional.karaoke === true && vehicle.karaoke === false) {
-                                                        } else
-                                                            if (optional.gps === true && vehicle.gps === false) {
-                                                            } else
-                                                                if (optional.foodDrink === true && vehicle.foodDrink === false) {
-                                                                } else
-                                                                    if (vehicle.user.metadata[0].gender !== optional.gender) {
-                                                                    } else
-                                                                        if (numPeople < num) {
-                                                                        } else
-                                                                            if (useForm.additional === "ไม่มี" || useForm.additional === "") {
-                                                                                return vehicle.country.indexOf(useForm.country) !== -1
-                                                                            } else
-                                                                                return vehicle.country.indexOf(useForm.country) !== -1 && vehicle.additional.indexOf(useForm.additional) !== -1
-                                                }
-                                            ).
+                                            // filter(
+                                            //     function (vehicle) {
+                                            //         console.log(vehicle)
+                                            //         var num = parseInt(vehicle.numberPeople)
+                                            //         if (vehicle.user.metadata[0].status === false) {
+                                            //             return null
+                                            //         }
+                                            //         for (var i = 0; i < useForm.dateRange.length; i++) {
+                                            //             for (var j = 0; j < vehicle.user.workDay.length; j++) {
+                                            //                 if (useForm.dateRange[i] === vehicle.user.workDay[j].date) {
+                                            //                     return null
+                                            //                 }
+                                            //             }
+                                            //         }
+                                            //         if (optional.tv === true && vehicle.tv === false) {
+                                            //         } else
+                                            //             if (optional.karaoke === true && vehicle.karaoke === false) {
+                                            //             } else
+                                            //                 if (optional.gps === true && vehicle.gps === false) {
+                                            //                 } else
+                                            //                     if (optional.foodDrink === true && vehicle.foodDrink === false) {
+                                            //                     } else
+                                            //                         if (vehicle.user.metadata[0].gender !== optional.gender) {
+                                            //                         } else
+                                            //                             if (numPeople < num) {
+                                            //                             } else
+                                            //                                 if (useForm.additional === "ไม่มี" || useForm.additional === "") {
+                                            //                                     return vehicle.country.indexOf(useForm.country) !== -1
+                                            //                                 } else
+                                            //                                     return vehicle.country.indexOf(useForm.country) !== -1 && vehicle.additional.indexOf(useForm.additional) !== -1
+                                            //     }
+                                            // ).
                                             map(
                                                 function (vehicle) {
+                                                    console.log(vehicle)
                                                     return (
                                                         <div key={vehicle.id}>
                                                             {User && User.id === vehicle.user.id ?

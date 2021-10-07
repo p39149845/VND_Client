@@ -66,6 +66,7 @@ export const CREATE_REQUEST = gql`
     $stopDate: String!
     $cost: Int!
     $startLocation: String!
+    $destination: String!
     $numberPeople: String!
     $locationDescription: String!
   ) {
@@ -75,6 +76,7 @@ export const CREATE_REQUEST = gql`
     country:$country
     startDate:$startDate
     stopDate:$stopDate
+    destination:$destination
     cost:$cost
     startLocation:$startLocation
     numberPeople:$numberPeople
@@ -85,6 +87,7 @@ export const CREATE_REQUEST = gql`
     startDate
     stopDate
     startLocation
+    destination
     numberPeople
     locationDescription
     cost

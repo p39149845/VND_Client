@@ -98,7 +98,8 @@ function VehicleInputComponent() {
         startTime: '',
         stopTime: '',
         vehicleId: '',
-        additional: ''
+        additional: '',
+        destination:""
     })
   
     const handleChange = e => { setUseForm({ ...useForm, [e.target.name]: e.target.value }) }
@@ -123,6 +124,7 @@ function VehicleInputComponent() {
                         locationDescription: useForm.locationDescription,
                         numberPeople: useForm.numberPeople,
                         cost: useForm.cost,
+                        destination:useForm.destination,
                         additional: useForm.additional,
                         hourResult: hourResult,
                         dateRange: dateArr,
@@ -176,19 +178,30 @@ function VehicleInputComponent() {
                                                     name="startLocation"
                                                     value={useForm.startLocation}
                                                     onChange={handleChange}
-                                                    placeholder="มหาวิทยาลัยเชียงใหม่ คณะวิศวกรรมศาสตร์"
-                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    placeholder="ตัวอย่าง บ้าน ต.รอบเวียง อ.เมือง จ.เชียงราย xxx/xxx"
+                                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
                                             </div>
 
-                                            <div className="col-span-6 sm:col-span-4">
+                                            <div className="col-span-6 sm:col-span-3">
+                                                <label className="block text-lg mx-3 font-medium text-gray-700">จุดหมายปลายทาง</label>
+                                                <input
+                                                    type="text"
+                                                    name="destination"
+                                                    value={useForm.destination}
+                                                    onChange={handleChange}
+                                                    placeholder="ตัวอย่าง จังหวัดเชียงใหม่ ม.เชียงใหม่ คณะวิศวกรรมศาสตร์"
+                                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                            </div>
+
+                                            <div className="col-span-6 sm:col-span-3">
                                                 <label className="block text-lg mx-3 font-medium text-gray-700">รายละเอียดการเดินทาง</label>
                                                 <input
                                                     type="text"
                                                     name="locationDescription"
                                                     value={useForm.locationDescription}
-                                                    placeholder="รายละเอียดเพิ่มเติมที่ต้องการบอกคนขับ เช่น ต้องการที่นั่งพิเศษ"
+                                                    placeholder="ตัวอย่าง เช่น ต้องการที่นั่งพิเศษ"
                                                     onChange={handleChange}
-                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                             </div>
 
                                             <div className="col-span-6 sm:col-span-3">
@@ -252,7 +265,7 @@ function VehicleInputComponent() {
                                                     placeholder="จำนวนผู้โดยสารไม่เกิน15คน "
                                                     value={useForm.numberPeople}
                                                     onChange={handleChange}
-                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                             </div>
                                             <div className="col-span-6 sm:col-span-3">
                                                 <label className="block text-lg mx-3 font-medium text-gray-700">
@@ -262,7 +275,7 @@ function VehicleInputComponent() {
                                                     name="additional"
                                                     value={useForm.additional}
                                                     onChange={handleChange}
-                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     <option value="ไม่มี" >เลือกบริการเสริมที่ต้องการ</option>
                                                     <option value="นำเที่ยวภายในจังหวัด" >นำเที่ยวภายในจังหวัด</option>
                                                     <option value="ดูแลผู้สูงอายุ">ดูแลผู้สูงอายุ</option>

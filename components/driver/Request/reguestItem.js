@@ -17,7 +17,7 @@ function ReguestItem({ request }) {
                     <div className="flex items-center">
                         <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900">
-                                {request.targetUser.metadata[0].userName}
+                                {request.user.name}
                             </div>
                         </div>
                     </div>
