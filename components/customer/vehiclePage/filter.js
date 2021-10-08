@@ -40,7 +40,7 @@ function Filter() {
 
     const { data, loading, error } = useQuery(QUERY_ALLVEHICLE)
     if (loading) return <p>Loading...</p>
-    
+
     return (
         <div className="bg-white ">
             <div>
@@ -55,7 +55,7 @@ function Filter() {
                         <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10">
 
                             <form className=" lg:block">
-                                <ul role="list" className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200">
+                                {/* <ul className="text-sm font-medium text-gray-900 space-y-4 border-b border-gray-200">
                                     <li>
                                         <div className="text-black text-lg">
                                             จังหวัด: <span className="font-light text-base">{useForm.country}</span>
@@ -79,8 +79,30 @@ function Filter() {
                                             วันที่จบการเดินทาง: <span className="font-light text-base">{useForm.stopDate}</span>
                                         </div>
                                     </li>
-                                </ul>
+                                </ul> */}
 
+                                <div className="border-b border-gray-200 py-4 overflow-x-auto">
+                                    <h3 className="-my-3 flow-root py-2">
+                                        <span className="font-black text-lg">
+                                            จังหวัด: <span className="font-light text-base">{useForm.country}</span>
+                                        </span>
+                                    </h3>
+                                    <h3 className="-my-3 flow-root py-2">
+                                        <span className="font-black text-lg">
+                                            จำนวนผู้โดยสาร: <span className="font-light text-base">  {useForm.numberPeople}  คน</span>
+                                        </span>
+                                    </h3>
+                                    <h3 className="-my-3 flow-root py-2">
+                                        <span className="font-black text-lg">
+                                            วันที่เริ่มเดินทาง: <span className="font-light text-base">{useForm.startDate}</span>
+                                        </span>
+                                    </h3>
+                                    <h3 className="-my-3 flow-root py-2">
+                                        <span className="font-black text-lg">
+                                            วันที่จบการเดินทาง: <span className="font-light text-base">{useForm.stopDate}</span>
+                                        </span>
+                                    </h3>
+                                </div>
                                 <div className="border-b border-gray-200 py-6 overflow-x-auto">
                                     <h3 className="-my-3 flow-root">
                                         <span className="font-black text-lg">
@@ -165,81 +187,82 @@ function Filter() {
                                     </div>
                                 </div>
                             </form>
-                            <div className="lg:col-span-3">
-                                <div className="border-4 border-dashed border-gray-200 rounded-lg lg:h-full">
-                                    <div className="flex flex-col">
-                                        <div className="flex flex-row grid grid-cols-7 rounded-md bg-blue-500 text-white overflow-x-auto">
-                                            <div className="px-6 py-4 whitespace-nowrap col-span-3">
-                                                รายละเอียดรถ
-                                            </div>
-
-                                            <div className="px-6 py-4 whitespace-nowrap col-span-1">
-                                                สถานะ
-                                            </div>
-                                            <div className="px-6 py-4 whitespace-nowrap col-span-1">
-                                                ราคา
-                                            </div>
-                                            <div className="col-span-2">
-
+                            <div className="lg:col-span-3 ">
+                                <div className="flex flex-col">
+                                    <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                        <div className="align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                                <table className="min-w-full divide-y divide-gray-200">
+                                                    <thead className="bg-blue-500">
+                                                        <tr>
+                                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                                                รายละเอียด
+                                                            </th>
+                                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                                                คนขับรถ
+                                                            </th>
+                                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                                                สถานะ
+                                                            </th>
+                                                            <th scope="col" className="relative px-6 py-3">
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody className="bg-white divide-y divide-gray-200">
+                                                        {data.allVehicle.
+                                                            filter(
+                                                                function (vehicle) {
+                                                                    console.log(vehicle)
+                                                                    var num = parseInt(vehicle.numberPeople)
+                                                                    if (vehicle.user.metadata[0].status === false) {
+                                                                        return null
+                                                                    }
+                                                                    for (var i = 0; i < useForm.dateRange.length; i++) {
+                                                                        for (var j = 0; j < vehicle.user.workDay.length; j++) {
+                                                                            if (useForm.dateRange[i] === vehicle.user.workDay[j].date) {
+                                                                                return null
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (optional.tv === true && vehicle.tv === false) {
+                                                                    } else
+                                                                        if (optional.karaoke === true && vehicle.karaoke === false) {
+                                                                        } else
+                                                                            if (optional.gps === true && vehicle.gps === false) {
+                                                                            } else
+                                                                                if (optional.foodDrink === true && vehicle.foodDrink === false) {
+                                                                                } else
+                                                                                    if (vehicle.user.metadata[0].gender !== optional.gender) {
+                                                                                    } else
+                                                                                        if (numPeople < num) {
+                                                                                        } else
+                                                                                            if (useForm.additional === "ไม่มี" || useForm.additional === "") {
+                                                                                                return vehicle.country.indexOf(useForm.country) !== -1
+                                                                                            } else
+                                                                                                return vehicle.country.indexOf(useForm.country) !== -1 && vehicle.additional.indexOf(useForm.additional) !== -1
+                                                                }
+                                                            ).
+                                                            map(
+                                                                function (vehicle) {
+                                                                    console.log(vehicle)
+                                                                    return (
+                                                                        <VehicleQuery
+                                                                            key={vehicle.id}
+                                                                            vehicle={vehicle}
+                                                                            useForm={useForm}
+                                                                            hourResult={useForm.hourResult}
+                                                                            diffTime={useForm.diffTime}
+                                                                        />
+                                                                    )
+                                                                }
+                                                            )}
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-
-                                        {data.allVehicle.
-                                            // filter(
-                                            //     function (vehicle) {
-                                            //         console.log(vehicle)
-                                            //         var num = parseInt(vehicle.numberPeople)
-                                            //         if (vehicle.user.metadata[0].status === false) {
-                                            //             return null
-                                            //         }
-                                            //         for (var i = 0; i < useForm.dateRange.length; i++) {
-                                            //             for (var j = 0; j < vehicle.user.workDay.length; j++) {
-                                            //                 if (useForm.dateRange[i] === vehicle.user.workDay[j].date) {
-                                            //                     return null
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //         if (optional.tv === true && vehicle.tv === false) {
-                                            //         } else
-                                            //             if (optional.karaoke === true && vehicle.karaoke === false) {
-                                            //             } else
-                                            //                 if (optional.gps === true && vehicle.gps === false) {
-                                            //                 } else
-                                            //                     if (optional.foodDrink === true && vehicle.foodDrink === false) {
-                                            //                     } else
-                                            //                         if (vehicle.user.metadata[0].gender !== optional.gender) {
-                                            //                         } else
-                                            //                             if (numPeople < num) {
-                                            //                             } else
-                                            //                                 if (useForm.additional === "ไม่มี" || useForm.additional === "") {
-                                            //                                     return vehicle.country.indexOf(useForm.country) !== -1
-                                            //                                 } else
-                                            //                                     return vehicle.country.indexOf(useForm.country) !== -1 && vehicle.additional.indexOf(useForm.additional) !== -1
-                                            //     }
-                                            // ).
-                                            map(
-                                                function (vehicle) {
-                                                    console.log(vehicle)
-                                                    return (
-                                                        <div key={vehicle.id}>
-                                                            {User && User.id === vehicle.user.id ?
-                                                                null : (
-                                                                    <VehicleQuery
-                                                                        key={vehicle.id}
-                                                                        vehicle={vehicle}
-                                                                        useForm={useForm}
-                                                                        hourResult={useForm.hourResult}
-                                                                        diffTime={useForm.diffTime}
-                                                                    />
-
-                                                                )}
-                                                        </div>
-                                                    )
-                                                }
-                                            )}
-
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </section>

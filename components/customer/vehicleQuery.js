@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import DescriptionVehicle from './descriptionVehicle'
-
+import { AuthContext } from '../../appState/AuthProvider'
 import Modal from 'react-modal'
 Modal.setAppElement('#__next')
 
@@ -8,8 +8,7 @@ function VehicleQuery({ vehicle, useForm, hourResult, diffTime }) {
 
     const [vehicleData, setVehicle] = useState(vehicle)
     const [modalOpen, setModalOpen] = useState(false)
-
-    // console.log("userForm", useForm.startTime)
+    const { user } = useContext(AuthContext)
     console.log(vehicle.price)
     diffTime = Math.ceil(diffTime)
     console.log("diffTime", diffTime)
@@ -33,55 +32,56 @@ function VehicleQuery({ vehicle, useForm, hourResult, diffTime }) {
     }
 
     return (
-        <div className="bg-white divide-y divide-gray-200">
-
-            <div className="flex flex-row md:grid md:grid-cols-7 overflow-x-auto">
-                <div className="px-6 py-4 whitespace-nowrap md:col-span-3">
+        <tr>
+            {user && user.id !== vehicle.user.id && <>
+                <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-15">
+                        <div className="flex-shrink-0 h-15 w-20">
                             <img className="h-full w-full"
                                 src={vehicleData.imageUrl[0]}
                                 alt={vehicleData.description} />
                         </div>
                         <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">
+                            <div className="text-sm text-gray-500">
                                 {vehicleData.description}
                             </div>
-                            <div className="text-sm text-gray-500">
-                                {vehicleData.user.name}
+                             <div className="text-sm font-medium text-gray-900">
+                                {vehicleData.price} บาท/วัน
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="px-6 py-4 whitespace-nowrap md:col-span-1">
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900"> {vehicleData.user.name}</div>
+                    <div className="text-sm text-gray-500">{vehicleData.user.email}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
                     <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                         Active
                     </span>
-                </div>
-                <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:col-span-1">
-                    {vehicleData.price} บาท/วัน
-                </div>
-                <div className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium md:col-span-2">
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <button
                         onClick={() => handleClick(vehicleData.user.id)}
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                         รายละเอียดเพิ่มเติม
                     </button>
-                </div>
-            </div>
-            <Modal
-                isOpen={modalOpen}
-            >
-                <div className="w-full">
-                    <button
-                        className="btn btn-danger"
-                        onClick={handleClick}>X
-                    </button>
-                    <DescriptionVehicle key={vehicleData.id} vehicle={vehicleData} useForm={useForm} modalOpen={modalOpen} />
-                </div>
-            </Modal>
-        </div>
+                </td>
+                <Modal
+                    isOpen={modalOpen}
+                >
+                    <div className="w-full">
+                        <button
+                            className="btn btn-danger"
+                            onClick={handleClick}>X
+                        </button>
+                        <DescriptionVehicle key={vehicleData.id} vehicle={vehicleData} useForm={useForm} modalOpen={modalOpen} />
+                    </div>
+                </Modal>
+            </>}
+        </tr>
+
 
     )
 }

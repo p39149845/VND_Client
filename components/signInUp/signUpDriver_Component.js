@@ -88,7 +88,7 @@ const DSignup = () => {
                             </span>
                             <input className="w-full h-12 focus:outline-none" type="password" name="password" placeholder="Password" value={userInfo.password} onChange={handleChange} />
                         </div>
-                        <button className="bg-indigo-600 block mx-auto text-white text-sm uppercase rounded shadow-md px-6 py-2" type='button' onClick={handleSubmit}>เข้าสู่ระบบ</button>
+                        <button className="bg-indigo-600 block mx-auto text-white text-sm uppercase rounded shadow-md px-6 py-2" type='button' onClick={handleSubmit}>ลงทะเบียน</button>
                     </div>
                 </div>
             </div>

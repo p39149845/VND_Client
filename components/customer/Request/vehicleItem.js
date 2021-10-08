@@ -1,6 +1,4 @@
 import React from 'react'
-import { reviewAndPayment } from '../../DataState/status'
-import Review from './review'
 
 function VehicleItem({ request }) {
 

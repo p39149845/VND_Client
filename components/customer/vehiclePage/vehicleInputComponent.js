@@ -189,7 +189,7 @@ function VehicleInputComponent() {
                                                     name="destination"
                                                     value={useForm.destination}
                                                     onChange={handleChange}
-                                                    placeholder="ตัวอย่าง จังหวัดเชียงใหม่ ม.เชียงใหม่ คณะวิศวกรรมศาสตร์"
+                                                    placeholder="ตย. จ.เชียงใหม่ ม.เชียงใหม่ คณะวิศวกรรมศาสตร์"
                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
                                             </div>
 
@@ -204,7 +204,7 @@ function VehicleInputComponent() {
                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                             </div>
 
-                                            <div className="col-span-6 sm:col-span-3">
+                                            <div className="col-span-6 sm:col-span-4">
                                                 <label className="block text-lg mx-3 font-medium text-gray-700">วันและเวลาเริ่มเดินทาง</label>
                                                 <DatePicker
                                                     selected={startDate}
@@ -216,7 +216,7 @@ function VehicleInputComponent() {
                                                     locale="th"
                                                 />
                                             </div>
-                                            <div className="col-span-6 sm:col-span-3">
+                                            <div className="col-span-6 sm:col-span-2">
                                                 <label className="block text-lg mx-3 font-medium text-gray-700">เวลา</label>
                                                 <DatePicker
                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -230,7 +230,7 @@ function VehicleInputComponent() {
                                                 />
                                             </div>
 
-                                            <div className="col-span-6 sm:col-span-3">
+                                            <div className="col-span-6 sm:col-span-4">
                                                 <label className="block text-lg mx-3 font-medium text-gray-700">วันและเวลาจบการเดินทาง</label>
                                                 <DatePicker
 
@@ -243,7 +243,7 @@ function VehicleInputComponent() {
                                                     locale="th"
                                                 />
                                             </div>
-                                            <div className="col-span-6 sm:col-span-3">
+                                            <div className="col-span-6 sm:col-span-2">
                                                 <label className="block text-lg mx-3 font-medium text-gray-700">เวลา</label>
                                                 <DatePicker
                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -257,7 +257,7 @@ function VehicleInputComponent() {
                                                 />
                                             </div>
 
-                                            <div className="col-span-6 sm:col-span-3">
+                                            <div className="col-span-6 sm:col-span-2">
                                                 <label className="block text-lg mx-3 font-medium text-gray-700">จำนวนผู้โดยสาร</label>
                                                 <input
                                                     type="number"
@@ -267,7 +267,7 @@ function VehicleInputComponent() {
                                                     onChange={handleChange}
                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                             </div>
-                                            <div className="col-span-6 sm:col-span-3">
+                                            <div className="col-span-6 sm:col-span-4">
                                                 <label className="block text-lg mx-3 font-medium text-gray-700">
                                                     บริการเสริม
                                                 </label>

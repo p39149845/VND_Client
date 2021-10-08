@@ -163,6 +163,7 @@ export const QUERY_ALLVEHICLE = gql`
     user{
       id
       name
+      email
       workDay{
         id
         date

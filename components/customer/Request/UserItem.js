@@ -1,6 +1,6 @@
 import React from 'react'
 
-function TestItem({ request }) {
+function UserItem({ request }) {
 
     const metadata = request && request.targetUser && request.targetUser.metadata.map(
         function (meta) {
@@ -81,4 +81,4 @@ function TestItem({ request }) {
         </div>
     )
 }
-export default TestItem
+export default UserItem
