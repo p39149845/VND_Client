@@ -1,4 +1,7 @@
 import React from 'react'
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 
 function VehicleItem({ request }) {
 
@@ -12,9 +15,16 @@ function VehicleItem({ request }) {
 
                     <div className="bg-white p-3 border-t-4 border-green-400">
                         <div className="image overflow-hidden">
-                            <img className="h-auto w-full mx-auto "
-                                src={request.targetVehicle.imageUrl[0]} alt="Vehicle Image"
-                            />
+                            <Carousel width="100%" showArrows emulateTouch useKeyboardArrows>
+                                {request &&
+                                    request.targetVehicle.imageUrl
+                                        .map(img => (
+                                            <div key={img}>
+                                                <img src={img}
+                                                    alt="Vehicle Image" />
+                                            </div>
+                                        ))}
+                            </Carousel>
                         </div>
                         <h1 className="text-gray-900 font-bold text-xl leading-8 my-1"></h1>
                     </div>
@@ -48,19 +58,19 @@ function VehicleItem({ request }) {
                                     <div className="px-4 py-2 font-semibold">อุปกรณ์บนรถ :</div>
                                     {
                                         request.targetVehicle.fooddrink ?
-                                        <div className="px-4 py-2">อาหารและเครื่องดืม ,</div>: null
-                                    } 
+                                            <div className="px-4 py-2">อาหารและเครื่องดืม ,</div> : null
+                                    }
                                     {
                                         request.targetVehicle.tv ?
-                                        <div className="px-4 py-2">TV ,</div>: null
+                                            <div className="px-4 py-2">TV ,</div> : null
                                     }
                                     {
                                         request.targetVehicle.gps ?
-                                        <div className="px-4 py-2">GPS ,</div>: null
+                                            <div className="px-4 py-2">GPS ,</div> : null
                                     }
                                     {
                                         request.targetVehicle.karaoke ?
-                                        <div className="px-4 py-2">คาราโอเกะ </div>: null
+                                            <div className="px-4 py-2">คาราโอเกะ </div> : null
                                     }
                                 </div>
                                 <div className="grid grid-cols-2">

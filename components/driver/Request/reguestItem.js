@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal'
 import TestItem from './testItem'
+import { waiting, accept, reject, startTrip, reviewAndPayment, finish } from '../../DataState/status'
 Modal.setAppElement('#__next')
 
 function ReguestItem({ request }) {
@@ -27,21 +28,39 @@ function ReguestItem({ request }) {
                 </div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    {request.status}
-                </span>
+                {
+                    request.status === waiting ?
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-600">
+                            {request.status}
+                        </span>
+                        : request.status === accept ?
+                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                {request.status}
+                            </span>
+                            : request.status === reject ?
+                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                    {request.status}
+                                </span>
+                                : request.status === reviewAndPayment ?
+                                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        {request.status}
+                                    </span> : <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        {request.status}
+                                    </span>
+                }
+
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">วัน : {StimeFormat[0]}</div>
-                <div className="text-sm text-gray-900">เวลา : {StimeFormat[1]}</div>
+                <div className="text-xs leading-5 font-semibold rounded-full">วัน : {StimeFormat[0]}</div>
+                <div className="text-xs leading-5 font-semibold rounded-full">เวลา : {StimeFormat[1]}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-500">วัน : {EtimeFormat[0]}</div>
-                <div className="text-sm text-gray-900">เวลา : {EtimeFormat[1]}</div>
+                <div className="text-xs leading-5 font-semibold rounded-full">วัน : {EtimeFormat[0]}</div>
+                <div className="text-xs leading-5 font-semibold rounded-full">เวลา : {EtimeFormat[1]}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
                 <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
-                    {request.cost}
+                    {request.cost} บาท
                 </span>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

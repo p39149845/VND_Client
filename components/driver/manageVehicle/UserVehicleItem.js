@@ -4,6 +4,7 @@ import Notification from '../../notification'
 import ConfirmDialog from '../../confirmDialog'
 import Modal from 'react-modal'
 
+
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 
@@ -52,12 +53,17 @@ const UserVehicleItem = ({ vehicle }) => {
             <div className="w-full md:w-3/12 md:mx-2">
                 <div className="bg-white p-3">
                     <div className="image overflow-hidden">
-                        <img className="h-auto w-full mx-auto "
-                            src={vehicleData.imageUrl[0]}
-                            alt={vehicleData.description}
-                        />
+                    <Carousel width="100%" showArrows emulateTouch useKeyboardArrows>
+                        {vehicle &&
+                            vehicle.imageUrl
+                                .map(img => (
+                                    <div key={img}>
+                                        <img src={img}
+                                            alt={vehicleData.description} />
+                                    </div>
+                                ))}
+                    </Carousel>
                     </div>
-                    <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{vehicleData.description}</h1>
                 </div>
                 <div className="my-4"></div>
             </div>
@@ -156,31 +162,6 @@ const UserVehicleItem = ({ vehicle }) => {
                 confirmDialog={confirmDialog}
                 setconfirmDialog={setconfirmDialog}
             />
-            <Modal
-                isOpen={modalOpen}
-            >
-                <button
-                    className="btn btn-danger"
-                    style={{
-
-                        margin: "1vh",
-                        alignSelf: "flex-start",
-                    }}
-                    onClick={openImg}>X
-                </button>
-                <div className="flex flex-col ">
-                    <Carousel width="100%" showArrows emulateTouch useKeyboardArrows>
-                        {vehicle &&
-                            vehicle.imageUrl
-                                .map(img => (
-                                    <div key={img}>
-                                        <img src={img}
-                                            alt={vehicleData.description} />
-                                    </div>
-                                ))}
-                    </Carousel>
-                </div>
-            </Modal>
         </div>
     )
 }

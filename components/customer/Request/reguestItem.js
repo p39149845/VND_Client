@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 import UserItem from './UserItem'
 import VehicleItem from './vehicleItem'
 import Review from './review'
-import { reviewAndPayment } from '../../DataState/status'
+import { waiting, accept, reject, startTrip, reviewAndPayment, finish } from '../../DataState/status'
 
 Modal.setAppElement('#__next')
 
@@ -26,45 +26,54 @@ function ReguestItem({ request }) {
                             {request.targetUser.metadata[0].userName}
                         </div>
                         {/* <div className="text-sm text-gray-500">
-                            {request.status}
-                        </div> */}
+                        {request.status}
+                    </div> */}
                     </div>
                 </div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    {request.status}
-                </span>
+                {
+                    request.status === waiting ?
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-600">
+                            {request.status}
+                        </span>
+                        : request.status === accept ?
+                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                {request.status}
+                            </span>
+                            : request.status === reject ?
+                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                    {request.status}
+                                </span>
+                                : request.status === reviewAndPayment ?
+                                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        {request.status}
+                                    </span> : <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        {request.status}
+                                    </span>
+                }
+
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">วัน : {StimeFormat[0]}</div>
-                <div className="text-sm text-gray-900">เวลา : {StimeFormat[1]}</div>
+                <div className="text-xs leading-5 font-semibold rounded-full">วัน : {StimeFormat[0]}</div>
+                <div className="text-xs leading-5 font-semibold rounded-full">เวลา : {StimeFormat[1]}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-500">วัน : {EtimeFormat[0]}</div>
-                <div className="text-sm text-gray-900">เวลา : {EtimeFormat[1]}</div>
+                <div className="text-xs leading-5 font-semibold rounded-full">วัน : {EtimeFormat[0]}</div>
+                <div className="text-xs leading-5 font-semibold rounded-full">เวลา : {EtimeFormat[1]}</div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
                 <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
-                    {request.cost}
+                    {request.cost} บาท
                 </span>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                {
-                    request.status === reviewAndPayment ?
-                        <button
-                            onClick={modalIsOpen}
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        >
-                            ให้คะแนน
-                        </button>
-                        : <button
-                            onClick={modalIsOpen}
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        >
-                            รายละเอียด
-                        </button>
-                }
+                <button
+                    onClick={modalIsOpen}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                    รายละเอียด
+                </button>
             </td>
             <Modal
                 isOpen={ModalOpen}
@@ -87,7 +96,7 @@ function ReguestItem({ request }) {
                         <VehicleItem key={Request.id} request={request} />
                         {
                             request.status === reviewAndPayment ?
-                                <div>
+                                <div className="flex flex-column min-w-screen text-white bg-gray-100 contain-center">
                                     <div className=" z-10 flex items-baseline justify-between my-3 mx-5 pt-5 pb-6 border-b border-black">
                                         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">รีวิว</h1>
                                     </div>
