@@ -56,11 +56,10 @@ function SignUp() {
                             <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
                         <Link
                             className="text-indigo-700"
-                            href='http://localhost:4000/auth/google'
+                            href='https://server492.herokuapp.com/auth/google'
                         >
                             Sign in with Google
                         </Link>
-
                     </button>
 
                 </div>
