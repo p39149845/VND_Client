@@ -234,7 +234,7 @@ function Filter() {
                                                                                 } else
                                                                                     if (vehicle.user.metadata[0].gender !== optional.gender) {
                                                                                     } else
-                                                                                        if (numPeople < num) {
+                                                                                        if (numPeople > num) {
                                                                                         } else
                                                                                             if (useForm.additional === "ไม่มี" || useForm.additional === "") {
                                                                                                 return vehicle.country.indexOf(useForm.country) !== -1
