@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react"
 import Router from 'next/router'
-import Link from 'next/link'
 import { useMutation } from "@apollo/react-hooks"
 import Cookies from "js-cookie"
 
@@ -51,7 +50,7 @@ function LogIn() {
         <div className="bg-cover-gray-100">
             <div className="max-w-md mx-auto bg-white shadow-xl border-1 rounded-md my-8">
                 <div className="text-center text-gray-600 py-4 text-2xl">เข้าสู่ระบบ</div>
-                <div className="flex justify-center mb-10">
+                {/* <div className="flex justify-center mb-10">
                     <button type="button" className="flex items-center bg-gray-100 shadow-md border border-gray-200 rounded px-4 py-2 mr-2">
                         <svg className="fill-current text-gray-600 w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
@@ -64,7 +63,7 @@ function LogIn() {
 
                     </button>
 
-                </div>
+                </div> */}
                 <div className="bg-green-300 pt-8 pb-16">
                     <div className="text-center text-gray-600 mb-6">หรือเข้าสู่ระบบโดยใช้ Email และ Password</div>
                     <div className="w-4/5 mx-auto">

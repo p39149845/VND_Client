@@ -50,7 +50,7 @@ const DSignup = () => {
                 <div className="text-center text-gray-600 py-4 text-2xl">
                     ลงทะเบียนคนขับรถ
                 </div>
-                <div className="flex justify-center mb-3">
+                {/* <div className="flex justify-center mb-3">
                     <button className="flex items-center bg-gray-100 shadow-md border border-gray-200 rounded px-4 py-2 mr-2">
                         <svg className="fill-current text-gray-600 w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
@@ -64,7 +64,7 @@ const DSignup = () => {
                 </div>
                 <div className="text-center text-gray-600 py-1 text-2xs">
                     หรือ
-                </div>
+                </div> */}
                 <div className="flex justify-center mb-3">
                     <button className="flex items-center bg-gray-100 shadow-md border border-gray-200 rounded px-4 py-2 mr-2">
                         <svg className="fill-current text-gray-600 w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
