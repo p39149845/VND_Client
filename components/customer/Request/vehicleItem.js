@@ -55,31 +55,33 @@ function VehicleItem({ request }) {
                                     <div className="px-4 py-2">{request.targetVehicle.country}</div>
                                 </div>
                                 <div className="grid grid-cols-2">
+                                    <div className="px-4 py-2 font-semibold">จำนวนที่นั่ง</div>
+                                    <div className="px-4 py-2">{request.targetVehicle.numberPeople}</div>
+                                </div>
+                                <div className="grid grid-cols-2">
                                     <div className="px-4 py-2 font-semibold">อุปกรณ์บนรถ :</div>
-                                    {
-                                        request.targetVehicle.fooddrink ?
-                                            <div className="px-4 py-2">อาหารและเครื่องดืม ,</div> : null
-                                    }
-                                    {
-                                        request.targetVehicle.tv ?
-                                            <div className="px-4 py-2">TV ,</div> : null
-                                    }
-                                    {
-                                        request.targetVehicle.gps ?
-                                            <div className="px-4 py-2">GPS ,</div> : null
-                                    }
-                                    {
-                                        request.targetVehicle.karaoke ?
-                                            <div className="px-4 py-2">คาราโอเกะ </div> : null
-                                    }
+                                    <div className="px-4 py-2">
+                                        {
+                                            request.targetVehicle.fooddrink ?
+                                                <span>อาหารและเครื่องดืม ,</span> : null
+                                        }
+                                        {
+                                            request.targetVehicle.tv ?
+                                                <span>TV ,</span> : null
+                                        }
+                                        {
+                                            request.targetVehicle.gps ?
+                                                <span>GPS ,</span> : null
+                                        }
+                                        {
+                                            request.targetVehicle.karaoke ?
+                                                <span>คาราโอเกะ </span> : null
+                                        }
+                                    </div>
                                 </div>
                                 <div className="grid grid-cols-2">
                                     <div className="px-4 py-2 font-semibold">บริการเสริมเพิ่มเติม</div>
                                     <div className="px-4 py-2">{request.targetVehicle.additional}</div>
-                                </div>
-                                <div className="grid grid-cols-2">
-                                    <div className="px-4 py-2 font-semibold">ราคาเริ่มต้น :</div>
-                                    <div className="px-4 py-2">{request.targetVehicle.price}</div>
                                 </div>
                             </div>
                         </div>

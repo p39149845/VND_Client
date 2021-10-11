@@ -194,7 +194,7 @@ function VehicleInputComponent() {
                                             </div>
 
                                             <div className="col-span-6 sm:col-span-3">
-                                                <label className="block text-lg mx-3 font-medium text-gray-700">รายละเอียดการเดินทาง</label>
+                                                <label className="block text-lg mx-3 font-medium text-gray-700">รายละเอียดเพิ่มเติม</label>
                                                 <input
                                                     type="text"
                                                     name="locationDescription"

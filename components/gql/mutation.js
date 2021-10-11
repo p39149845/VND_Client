@@ -37,22 +37,24 @@ export const LOG_IN_USER = gql`
 `
 
 export const SIGN_UP_USER = gql`
-  mutation SIGN_UP_USER($name: String!, $email: String!, $password: String!) {
-    signup(name: $name, email: $email, password: $password) {
+  mutation SIGN_UP_USER($name: String!, $email: String!, $password: String!,$phoneNumber: String!) {
+    signup(name: $name, email: $email, password: $password ,phoneNumber: $phoneNumber) {
       id
       name
       email
+      phoneNumber
     }
   }
 `
 
 export const SIGN_UP_DRIVER = gql`
-  mutation SIGN_UP_DRIVER($name: String!, $email: String!, $password: String! $status: Boolean!) {
-    signupDriver(name: $name, email: $email, password: $password, status: $status) {
+  mutation SIGN_UP_DRIVER($name: String!, $email: String!, $password: String! ,$status: Boolean!,$phoneNumber:String!) {
+    signupDriver(name: $name, email: $email, password: $password, status: $status,phoneNumber: $phoneNumber) {
       id
       name
       email
       status
+      phoneNumber
     }
   }
 `

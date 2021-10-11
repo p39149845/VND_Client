@@ -6,6 +6,7 @@ export const ME = gql`
     user{
     id
     name
+    phoneNumber
     workDay{
         id
         date
@@ -57,6 +58,7 @@ export const ME = gql`
       targetUser{
         id
         name
+        phoneNumber
         metadata{
           image
           userName
@@ -65,6 +67,7 @@ export const ME = gql`
       user{
         id
         name
+        phoneNumber
       }
   }
   metadata{
@@ -81,6 +84,7 @@ export const ME = gql`
       email
       id
       name
+      phoneNumber
       }
     }
   }
@@ -92,6 +96,7 @@ export const ALLUSER = gql`
     allUser{
     id
     name
+    phoneNumber
     workDay{
         id
         date
@@ -164,6 +169,7 @@ export const QUERY_ALLVEHICLE = gql`
       id
       name
       email
+      phoneNumber
       workDay{
         id
         date
@@ -202,6 +208,7 @@ export const QUERY_ALLMETADATA = gql`
     user{
       id
       name
+      phoneNumber
     }
   }
   }

@@ -14,25 +14,20 @@ function TestItem({ request }) {
 
     const [Request] = useState(request)
 
-
-    console.log(Request.startDate)
     var SrangeDate = (Request.startDate.toString()).split("|").slice(0, 1)
     var ErangeDate = (Request.stopDate.toString()).split("|").slice(0, 1)
 
     var SrangeTime = (Request.startDate.toString()).split("|").slice(1, 2)
     var ErangeTime = (Request.stopDate.toString()).split("|").slice(1, 2)
-    console.log("ErangeTime",ErangeTime)
+    
     
     var Srange = (SrangeDate.toString()).split("/").slice(0, 3)
     var Erange = (ErangeDate.toString()).split("/").slice(0, 3)
 
-    console.log(Srange, Erange)
-
     var calRange = (Erange[0] - Srange[0])
 
     var StartdateFormat = new Date(Srange[2], Srange[1], Srange[0])
-    console.log(StartdateFormat)
-
+    
     Date.prototype.addDays = function (days) {
         var dat = new Date(this.valueOf())
         dat.setDate(dat.getDate() + days);
@@ -201,6 +196,10 @@ function TestItem({ request }) {
                                     <div className="grid grid-cols-2">
                                         <div className="px-4 py-2 font-semibold">ชื่อ-สกุล ผู้โดยสาร:</div>
                                         <div className="px-4 py-2">{request.user.name}</div>
+                                    </div>
+                                    <div className="grid grid-cols-2">
+                                        <div className="px-4 py-2 font-semibold">เบอร์โทร:</div>
+                                        <div className="px-4 py-2">{request.user.phoneNumber}</div>
                                     </div>
                                     <div className="grid grid-cols-2">
                                         <div className="px-4 py-2 font-semibold">จังหวัด</div>

@@ -21,9 +21,9 @@ function ReguestItem({ request }) {
                         <div className="text-sm font-medium text-gray-900">
                             {request.user.name}
                         </div>
-                        {/* <div className="text-sm text-gray-500">
-                        {request.status}
-                    </div> */}
+                        <div className="text-sm text-gray-500">
+                        {request.user.phoneNumber}
+                    </div>
                     </div>
                 </div>
             </td>

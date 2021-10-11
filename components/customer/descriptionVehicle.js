@@ -123,6 +123,7 @@ function TestFilter({ vehicle, useForm }) {
                                 <div>
                                     <p className="leading-relaxed">ชื่อ : {metadata[0].userName}</p>
                                     <p className="leading-relaxed">เพศ : {metadata[0].gender}</p>
+                                    <p className="leading-relaxed">เบอร์โทร : {vehicleData.user.phoneNumber}</p>
                                     <p className="leading-relaxed">จังหวัดที่ให้บริการ : {vehicleData.country}</p>
                                     <p className="leading-relaxed">จำนวนที่นั่ง : {vehicleData.numberPeople}</p>
                                     <div className="leading-relaxed flex flex-row" >

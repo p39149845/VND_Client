@@ -9,7 +9,8 @@ function SignUp() {
     const [userInfo, setUserInfo] = useState({
         name: "",
         email: "",
-        password: ""
+        password: "",
+        phoneNumber:"",
     })
     const [success, setSuccess] = useState(false)
 
@@ -21,7 +22,8 @@ function SignUp() {
                 setUserInfo({
                     name: "",
                     email: "",
-                    password: ""
+                    password: "",
+                    phoneNumber:""
                 })
                 Router.push("/signIn")
             }
@@ -89,6 +91,13 @@ function SignUp() {
                                 <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
                             </span>
                             <input className="w-full h-12 focus:outline-none" type="name" name="name" placeholder="UserName" value={userInfo.name} onChange={handleChange} />
+                        </div>
+                        <div className="flex items-center bg-white rounded shadow-md mb-4">
+                            <span className="px-3">
+                                <svg className="fill-current text-gray-500 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M18 2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h16zm-4.37 9.1L20 16v-2l-5.12-3.9L20 6V4l-10 8L0 4v2l5.12 4.1L0 14v2l6.37-4.9L10 14l3.63-2.9z" /></svg>
+                            </span>
+                            <input className="w-full h-12 focus:outline-none" type="tel" name="phoneNumber" placeholder="phoneNumber" value={userInfo.phoneNumber} onChange={handleChange} />
                         </div>
                         <div className="flex items-center bg-white rounded shadow-md mb-4">
                             <span className="px-3">

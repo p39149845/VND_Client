@@ -68,6 +68,10 @@ function Profile() {
                                                     <div className="px-4 py-2">{metadataSet.gender}</div>
                                                 </div>
                                                 <div className="grid grid-cols-2">
+                                                    <div className="px-4 py-2 font-semibold">เบอร์โทรศัพท์</div>
+                                                    <div className="px-4 py-2">{metadataSet.user.phoneNumber}</div>
+                                                </div>
+                                                <div className="grid grid-cols-2">
                                                     <div className="px-4 py-2 font-semibold">รหัสประชาชน</div>
                                                     <div className="px-4 py-2">{metadataSet.idCard}</div>
                                                 </div>

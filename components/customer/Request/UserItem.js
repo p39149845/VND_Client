@@ -8,6 +8,13 @@ function UserItem({ request }) {
         }
     )
 
+    var SrangeDate = (request.startDate.toString()).split("|").slice(0, 1)
+    var ErangeDate = (request.stopDate.toString()).split("|").slice(0, 1)
+
+    var SrangeTime = (request.startDate.toString()).split("|").slice(1, 2)
+    var ErangeTime = (request.stopDate.toString()).split("|").slice(1, 2)
+    console.log(SrangeDate)
+
     return (
         <div className="container mx-auto p-1">
             <div className="md:flex no-wrap md:-mx-2 ">
@@ -44,6 +51,10 @@ function UserItem({ request }) {
                                     <div className="px-4 py-2">{metadata[0].userName}</div>
                                 </div>
                                 <div className="grid grid-cols-2">
+                                    <div className="px-4 py-2 font-semibold">เบอร์โทร :</div>
+                                    <div className="px-4 py-2">{request.targetUser.phoneNumber}</div>
+                                </div>
+                                <div className="grid grid-cols-2">
                                     <div className="px-4 py-2 font-semibold">จังหวัด</div>
                                     <div className="px-4 py-2">
                                         {request.country}
@@ -58,16 +69,24 @@ function UserItem({ request }) {
                                     <div className="px-4 py-2">{request.startLocation}</div>
                                 </div>
                                 <div className="grid grid-cols-2">
+                                    <div className="px-4 py-2 font-semibold">รายละเอียดเพิ่มเติม</div>
+                                    <div className="px-4 py-2">{request.locationDescription}</div>
+                                </div>
+                                <div className="grid grid-cols-2">
                                     <div className="px-4 py-2 font-semibold">วันที่เริ่มเดินทาง</div>
-                                    <div className="px-4 py-2">{request.startDate}</div>
+                                    <div className="px-4 py-2">{SrangeDate}</div>
+                                </div>
+                                <div className="grid grid-cols-2">
+                                    <div className="px-4 py-2 font-semibold">เวลา</div>
+                                    <div className="px-4 py-2">{SrangeTime}</div>
                                 </div>
                                 <div className="grid grid-cols-2">
                                     <div className="px-4 py-2 font-semibold">วันที่จบการเดินทาง</div>
-                                    <div className="px-4 py-2">{request.stopDate}</div>
+                                    <div className="px-4 py-2">{ErangeDate}</div>
                                 </div>
                                 <div className="grid grid-cols-2">
-                                    <div className="px-4 py-2 font-semibold">รายละเอียดเพิ่มเติม</div>
-                                    <div className="px-4 py-2">{request.locationDescription}</div>
+                                    <div className="px-4 py-2 font-semibold">เวลา</div>
+                                    <div className="px-4 py-2">{ErangeTime}</div>
                                 </div>
                                 <div className="grid grid-cols-2">
                                     <div className="px-4 py-2 font-semibold">ราคา</div>
