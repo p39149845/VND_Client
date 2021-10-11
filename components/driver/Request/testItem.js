@@ -4,6 +4,9 @@ import { useMutation } from '@apollo/react-hooks'
 import { UPDATE_REQUEST, CREATE_WORKDAY } from '../../gql/mutation'
 import { ME } from '../../gql/query'
 
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 function TestItem({ request }) {
 
     const metadata = request && request.targetUser && request.targetUser.metadata.map(
@@ -12,22 +15,20 @@ function TestItem({ request }) {
         }
     )
 
-    const [Request] = useState(request)
+    var SrangeDate = (request.startDate.toString()).split("|").slice(0, 1)
+    var ErangeDate = (request.stopDate.toString()).split("|").slice(0, 1)
 
-    var SrangeDate = (Request.startDate.toString()).split("|").slice(0, 1)
-    var ErangeDate = (Request.stopDate.toString()).split("|").slice(0, 1)
+    var SrangeTime = (request.startDate.toString()).split("|").slice(1, 2)
+    var ErangeTime = (request.stopDate.toString()).split("|").slice(1, 2)
 
-    var SrangeTime = (Request.startDate.toString()).split("|").slice(1, 2)
-    var ErangeTime = (Request.stopDate.toString()).split("|").slice(1, 2)
-    
-    
+
     var Srange = (SrangeDate.toString()).split("/").slice(0, 3)
     var Erange = (ErangeDate.toString()).split("/").slice(0, 3)
 
     var calRange = (Erange[0] - Srange[0])
 
     var StartdateFormat = new Date(Srange[2], Srange[1], Srange[0])
-    
+
     Date.prototype.addDays = function (days) {
         var dat = new Date(this.valueOf())
         dat.setDate(dat.getDate() + days);
@@ -168,11 +169,18 @@ function TestItem({ request }) {
 
                         <div className="bg-white p-3 border-t-4 border-green-400">
                             <div className="image overflow-hidden">
-                                <img className="h-auto w-full mx-auto "
-                                    src={metadata[0].image} alt='Person Image'
-                                />
+                                <Carousel width="100%" showArrows emulateTouch useKeyboardArrows>
+                                    {request &&
+                                        request.targetVehicle.imageUrl
+                                            .map(img => (
+                                                <div key={img}>
+                                                    <img src={img}
+                                                        alt="Vehicle Image" />
+                                                </div>
+                                            ))}
+                                </Carousel>
                             </div>
-                            <h1 className="text-gray-900 font-bold text-xl leading-8 my-1"></h1>
+                            <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{request.targetVehicle.description}</h1>
                         </div>
                         <div className="my-4"></div>
                     </div>
