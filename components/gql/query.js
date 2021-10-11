@@ -31,6 +31,15 @@ export const ME = gql`
       karaoke
       tv
       gps
+      user{
+        name
+        review{
+          star
+          starVehicle
+          review
+          reviewVehicle
+      }
+      }
     }
     requests{
       id

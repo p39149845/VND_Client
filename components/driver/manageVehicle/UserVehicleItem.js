@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/react-hooks'
 import Notification from '../../notification'
 import ConfirmDialog from '../../confirmDialog'
 import Modal from 'react-modal'
+import Review from "./review"
 
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -17,6 +18,15 @@ const UserVehicleItem = ({ vehicle }) => {
     const [vehicleData, setVehicle] = useState(vehicle)
     const [modalOpen, setModalOpen] = useState(false)
 
+
+    var reviewArr = new Array
+    reviewArr = vehicle.user.review
+    console.log(vehicle.user.review, reviewArr)
+    
+    const modalIsOpen = () => {
+        setModalOpen(!modalOpen)
+    }
+
     const [notify, setnotify] = useState({ isOpen: false, message: '', type: '' })
     const [confirmDialog, setconfirmDialog] = useState({ isOpen: false, title: '', subTitle: '' })
 
@@ -26,9 +36,6 @@ const UserVehicleItem = ({ vehicle }) => {
         },
         refetchQueries: [{ query: ME }]
     })
-    const openImg = (id) => {
-        setModalOpen(!modalOpen)
-    }
 
     const handleDelete = async () => {
         try {
@@ -53,16 +60,16 @@ const UserVehicleItem = ({ vehicle }) => {
             <div className="w-full md:w-3/12 md:mx-2">
                 <div className="bg-white p-3">
                     <div className="image overflow-hidden">
-                    <Carousel width="100%" showArrows emulateTouch useKeyboardArrows>
-                        {vehicle &&
-                            vehicle.imageUrl
-                                .map(img => (
-                                    <div key={img}>
-                                        <img src={img}
-                                            alt={vehicleData.description} />
-                                    </div>
-                                ))}
-                    </Carousel>
+                        <Carousel width="100%" showArrows emulateTouch useKeyboardArrows>
+                            {vehicle &&
+                                vehicle.imageUrl
+                                    .map(img => (
+                                        <div key={img}>
+                                            <img src={img}
+                                                alt={vehicleData.description} />
+                                        </div>
+                                    ))}
+                        </Carousel>
                     </div>
                 </div>
                 <div className="my-4"></div>
@@ -83,7 +90,7 @@ const UserVehicleItem = ({ vehicle }) => {
                     </div>
                     <div className="text-gray-700">
                         <div className="grid md:grid-cols-2 text-md">
-                        <div className="grid grid-cols-2">
+                            <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-semibold">รุ่นรถ</div>
                                 <div className="px-4 py-2">
                                     <div className="text-blue-800"> {vehicleData.description}</div>
@@ -130,25 +137,34 @@ const UserVehicleItem = ({ vehicle }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-1">
-                                <button
-                                    className="bg-red-500 hover:bg-red-700 py-2 px-4 rounded text-white max-w-30 text-center"
-                                    onClick={() =>
-                                        setconfirmDialog({
-                                            isOpen: true,
-                                            title: "คุณต้องการลบรถตู้คันนี้หรือไม่?",
-                                            subTitle: "กรุณาตรวจสอบรายละเอียดให้ครบถ้วน",
-                                            onConfirm: () => {
-                                                handleDelete()
-                                            }
-                                        })
-                                    }
-                                >
-                                    Delete
-                                </button>
-                            </div>
+
                         </div>
                     </div>
+                </div>
+                <div className="flex flex-row justify-between">
+                    <button
+                        className="bg-green-500 hover:bg-red-700 py-2 px-4 rounded text-white max-w-30 text-center"
+                        onClick={
+                            modalIsOpen
+                        }
+                    >
+                        Review
+                    </button>
+                    <button
+                        className="bg-red-500 hover:bg-red-700 py-2 px-4 rounded text-white max-w-30 text-center"
+                        onClick={() =>
+                            setconfirmDialog({
+                                isOpen: true,
+                                title: "คุณต้องการลบรถตู้คันนี้หรือไม่?",
+                                subTitle: "กรุณาตรวจสอบรายละเอียดให้ครบถ้วน",
+                                onConfirm: () => {
+                                    handleDelete()
+                                }
+                            })
+                        }
+                    >
+                        Delete
+                    </button>
                 </div>
             </div>
 
@@ -162,6 +178,22 @@ const UserVehicleItem = ({ vehicle }) => {
                 confirmDialog={confirmDialog}
                 setconfirmDialog={setconfirmDialog}
             />
+            <Modal
+                isOpen={modalOpen}
+            >
+                <div className="flex flex-column min-h-screen min-w-screen text-white bg-gray-100 contain-center">
+                    <button
+                        className="btn btn-danger"
+                        style={{
+
+                            margin: "1vh",
+                            alignSelf: "flex-start",
+                        }}
+                        onClick={modalIsOpen}>X
+                    </button>
+                    <Review key={vehicle.id} vehicle={vehicle}/>
+                </div>
+            </Modal>
         </div>
     )
 }
